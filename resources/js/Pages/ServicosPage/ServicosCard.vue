@@ -1,14 +1,15 @@
 <template>
-    <div class="col-sm-12 col-md-6 p-2">
+    <div class="col-sm-12 col-md-6 col-lg-4 p-2">
         <div
             :class="[
-                servicos.pago == 'Não' ? 'border-danger' : 'border-success',
+                servicos.pago == 0 ? 'border-danger' : 'border-success',
                 'card',
             ]"
         >
+       
             <div
                 :class="[
-                    servicos.pago == 'Não' ? 'bg-danger' : 'bg-success',
+                    servicos.pago == 0 ? 'bg-danger' : 'bg-success',
                     'card-header card text-white  mb-3',
                 ]"
             >
@@ -22,7 +23,7 @@
                         <h3>R$: {{ servicos.valor }}</h3>
                     </div>
                     <div class="col-6">
-                        <h3>Pago: {{ servicos.pago }}</h3>
+                        <h3>Pago: {{ servicos.pagoexib }}</h3>
                     </div>
                 </div>
                 <div class="col">
@@ -49,10 +50,10 @@ export default {
     props: ["servicos"],
     setup(props, context) {
         onMounted(() => {
-            if (props.servicos.pago == false) {
-                props.servicos.pago = "Não";
+            if (props.servicos.pago == 0) {
+                props.servicos.pagoexib = "Não";
             } else {
-                props.servicos.pago = "Sim";
+                props.servicos.pagoexib = "Sim";
             }
         });
     },

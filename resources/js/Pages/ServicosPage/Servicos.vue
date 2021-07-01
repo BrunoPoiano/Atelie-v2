@@ -8,16 +8,18 @@
                 <label for="" class="form-label">Data Inicial</label>
                 <datepicker
                     class="form-control form-control-lg"
-                    v-model="getServicos.dataincial"
+                    v-model="datainicial"
                     :inputFormat="'dd/MM/yyyy'"
+
                 />
             </div>
             <div class="col-6">
                 <label for="" class="form-label">Data Final</label>
                 <datepicker
                     class="form-control form-control-lg"
-                    v-model="getServicos.datafinal"
+                    v-model="datafinal"
                     :inputFormat="'dd/MM/yyyy'"
+
                 />
             </div>
         </div>
@@ -29,8 +31,9 @@
                     class="form-control form-control-lg"
                     aria-label="Default select example"
                     v-model="getServicos.pago"
+                    @change="getservico"
                 >
-                    <option>Todos</option>
+                    <option :value="null">Todos</option>
                     <option value="0">Não</option>
                     <option value="1">Sim</option>
                 </select>
@@ -41,11 +44,14 @@
                     type="text"
                     class="form-control form-control-lg"
                     v-model="getServicos.cliente"
+                    @keyup="getservico"
                 />
             </div>
         </div>
     </div>
-
+    <div class="col p-2">
+    <button class="btn btn-success btn-lg" @click="getservico">Pesquisar</button>
+    </div>
     <div class="row">
         <servicos-card
             :servicos="ser"
@@ -66,24 +72,50 @@ export default {
     components: { ServicosCard, Datepicker },
     setup() {
         const servicos = ref([]);
+        const datainicial = ref(new Date());
+        const datafinal = ref(new Date());
+
         const getServicos = ref({
-            dataincial: new Date(),
-            datafinal: new Date(),
-            pago: "",
+            pago: "null",
             cliente: "",
         });
 
         onMounted(() => {
-            getservicos();
+            getservico();
         });
 
-        const getservicos = () => {
-            axios.get("servicos/getServico").then((resp) => {
+        function datahandle(data) {
+            let date = new Date(data);
+            let dia = date.getDate();
+            let mes = date.getMonth();
+            let ano = date.getFullYear();
+            mes = mes + 1;
+            if (mes < 10) {
+                mes = "0" + mes;
+            }
+            if (dia < 10) {
+                dia = "0" + dia;
+            }
+            return ano + "-" + mes + "-" + dia;
+        }
+
+        const getservico = () => {
+            let dtinicial = datahandle(datainicial.value);
+            let dtfinal = datahandle(datafinal.value);
+
+            let fdservicos = new FormData();
+            fdservicos.append("datainicial", dtinicial);
+            fdservicos.append("datafinal", dtfinal);
+            fdservicos.append("pago", getServicos.value.pago);
+            fdservicos.append("cliente", getServicos.value.cliente);
+
+            axios.post("servicos/getServico", fdservicos).then((resp) => {
+                console.log(resp.data);
                 servicos.value = resp.data;
             });
         };
 
-        return { servicos, getServicos };
+        return { servicos, getServicos, getservico, datainicial, datafinal };
     },
 };
 </script>

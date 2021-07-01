@@ -18140,25 +18140,54 @@ __webpack_require__.r(__webpack_exports__);
   },
   setup: function setup() {
     var servicos = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
+    var datainicial = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(new Date());
+    var datafinal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(new Date());
     var getServicos = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
-      dataincial: new Date(),
-      datafinal: new Date(),
-      pago: "",
+      pago: "null",
       cliente: ""
     });
     (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_3__.onMounted)(function () {
-      getservicos();
+      getservico();
     });
 
-    var getservicos = function getservicos() {
-      axios.get("servicos/getServico").then(function (resp) {
+    function datahandle(data) {
+      var date = new Date(data);
+      var dia = date.getDate();
+      var mes = date.getMonth();
+      var ano = date.getFullYear();
+      mes = mes + 1;
+
+      if (mes < 10) {
+        mes = "0" + mes;
+      }
+
+      if (dia < 10) {
+        dia = "0" + dia;
+      }
+
+      return ano + "-" + mes + "-" + dia;
+    }
+
+    var getservico = function getservico() {
+      var dtinicial = datahandle(datainicial.value);
+      var dtfinal = datahandle(datafinal.value);
+      var fdservicos = new FormData();
+      fdservicos.append("datainicial", dtinicial);
+      fdservicos.append("datafinal", dtfinal);
+      fdservicos.append("pago", getServicos.value.pago);
+      fdservicos.append("cliente", getServicos.value.cliente);
+      axios.post("servicos/getServico", fdservicos).then(function (resp) {
+        console.log(resp.data);
         servicos.value = resp.data;
       });
     };
 
     return {
       servicos: servicos,
-      getServicos: getServicos
+      getServicos: getServicos,
+      getservico: getservico,
+      datainicial: datainicial,
+      datafinal: datafinal
     };
   }
 });
@@ -18182,10 +18211,10 @@ __webpack_require__.r(__webpack_exports__);
   props: ["servicos"],
   setup: function setup(props, context) {
     (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-      if (props.servicos.pago == false) {
-        props.servicos.pago = "Não";
+      if (props.servicos.pago == 0) {
+        props.servicos.pagoexib = "Não";
       } else {
-        props.servicos.pago = "Sim";
+        props.servicos.pagoexib = "Sim";
       }
     });
   }
@@ -18863,7 +18892,9 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", null, "Todos", -1
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: null
+}, "Todos", -1
 /* HOISTED */
 );
 
@@ -18890,6 +18921,9 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 );
 
 var _hoisted_16 = {
+  "class": "col p-2"
+};
+var _hoisted_17 = {
   "class": "row"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -18899,18 +18933,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_datepicker, {
     "class": "form-control form-control-lg",
-    modelValue: $setup.getServicos.dataincial,
+    modelValue: $setup.datainicial,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $setup.getServicos.dataincial = $event;
+      return $setup.datainicial = $event;
     }),
     inputFormat: 'dd/MM/yyyy'
   }, null, 8
   /* PROPS */
   , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_datepicker, {
     "class": "form-control form-control-lg",
-    modelValue: $setup.getServicos.datafinal,
+    modelValue: $setup.datafinal,
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $setup.getServicos.datafinal = $event;
+      return $setup.datafinal = $event;
     }),
     inputFormat: 'dd/MM/yyyy'
   }, null, 8
@@ -18920,18 +18954,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "aria-label": "Default select example",
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $setup.getServicos.pago = $event;
+    }),
+    onChange: _cache[4] || (_cache[4] = function () {
+      return $setup.getservico && $setup.getservico.apply($setup, arguments);
     })
-  }, [_hoisted_11, _hoisted_12, _hoisted_13], 512
-  /* NEED_PATCH */
+  }, [_hoisted_11, _hoisted_12, _hoisted_13], 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.getServicos.pago]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
     "class": "form-control form-control-lg",
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $setup.getServicos.cliente = $event;
+    }),
+    onKeyup: _cache[6] || (_cache[6] = function () {
+      return $setup.getservico && $setup.getservico.apply($setup, arguments);
     })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.getServicos.cliente]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.servicos, function (ser, index) {
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.getServicos.cliente]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    "class": "btn btn-success btn-lg",
+    onClick: _cache[7] || (_cache[7] = function () {
+      return $setup.getservico && $setup.getservico.apply($setup, arguments);
+    })
+  }, "Pesquisar")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.servicos, function (ser, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_servicos_card, {
       servicos: ser,
       key: index
@@ -18961,7 +19006,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "col-sm-12 col-md-6 p-2"
+  "class": "col-sm-12 col-md-6 col-lg-4 p-2"
 };
 var _hoisted_2 = {
   "class": "col text-center p-2"
@@ -18986,16 +19031,16 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVN
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-    "class": [$props.servicos.pago == 'Não' ? 'border-danger' : 'border-success', 'card']
+    "class": [$props.servicos.pago == 0 ? 'border-danger' : 'border-success', 'card']
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-    "class": [$props.servicos.pago == 'Não' ? 'bg-danger' : 'bg-success', 'card-header card text-white  mb-3']
+    "class": [$props.servicos.pago == 0 ? 'bg-danger' : 'bg-success', 'card-header card text-white  mb-3']
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.servicos.nome), 1
   /* TEXT */
   )])], 2
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", null, "R$: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.servicos.valor), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", null, "Pago: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.servicos.pago), 1
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", null, "Pago: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.servicos.pagoexib), 1
   /* TEXT */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.servicos.servico), 1
   /* TEXT */
