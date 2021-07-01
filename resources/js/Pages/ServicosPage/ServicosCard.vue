@@ -1,5 +1,5 @@
 <template>
-    <div class="col-sm-6 p-2">
+    <div class="col-sm-12 col-md-6 p-2">
         <div
             :class="[
                 servicos.pago == 'Não' ? 'border-danger' : 'border-success',
@@ -26,8 +26,17 @@
                     </div>
                 </div>
                 <div class="col">
-                    <h4> {{ servicos.servico }}</h4>
-                   
+                    <h4>{{ servicos.servico }}</h4>
+                </div>
+            </div>
+            <div class="card-footer ">
+                <div class="row p-2">
+                    <div class="col-6 text-center">
+                        <button class="btn btn-warning btn-lg">Editar</button>
+                    </div>
+                    <div class="col-6 text-center">
+                        <button class="btn btn-danger btn-lg">Excluir</button>
+                    </div>
                 </div>
             </div>
         </div>

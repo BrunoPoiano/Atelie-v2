@@ -28,6 +28,7 @@ class ServicosFactory extends Factory
             'valor'=> $this->faker->numberBetween(5,50), 
             'pago'=> $this->faker->numberBetween(0,1), 
             'servico'=> Str::random(15),
+            'data'=>Carbon::now(),
             'created_at'=>Carbon::now(),
             'updated_at'=>Carbon::now(),
         ];

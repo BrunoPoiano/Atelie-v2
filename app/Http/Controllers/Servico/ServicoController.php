@@ -4,22 +4,25 @@ namespace App\Http\Controllers\Servico;
 
 use App\Http\Controllers\Controller;
 use App\Models\Servicos\Servicos;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ServicoController extends Controller
 {
 
     public function store(Request $request)
-    {
-        if ($request) {
+    {       
+                if ($request) {
             $request->validate([
                 'cliente_id' => 'required|numeric',
                 'valor' => 'numeric',
             ]);
+            $data = new Carbon($request->data);
             $novoServico = new Servicos([
                 'cliente_id' => $request->cliente_id,
                 'valor' => $request->valor,
                 'pago' => $request->pago,
+                'data' => $data,
                 'servico' => $request->servico,
             ]);
             $novoServico->save();

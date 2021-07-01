@@ -1,34 +1,46 @@
 <template>
     <div class="p-2">
-        <div class="row">
-            <div class="col-6">
-                <input
-                    type="text"
-                    class="form-control form-control-lg"
-                    placeholder="Data Inicial"
-                />
-            </div>
-            <div class="col-6">
-                <input
-                    type="text"
-                    class="form-control form-control-lg"
-                    placeholder="Data Final"
-                />
-            </div> 
+        <div class="col text-center p-2">
+            <h2>Serviços</h2>
         </div>
         <div class="row">
             <div class="col-6">
-                <input
-                    type="text"
+                <label for="" class="form-label">Data Inicial</label>
+                <datepicker
                     class="form-control form-control-lg"
-                    placeholder="Pago"
+                    v-model="getServicos.dataincial"
+                    :inputFormat="'dd/MM/yyyy'"
                 />
             </div>
             <div class="col-6">
+                <label for="" class="form-label">Data Final</label>
+                <datepicker
+                    class="form-control form-control-lg"
+                    v-model="getServicos.datafinal"
+                    :inputFormat="'dd/MM/yyyy'"
+                />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label class="form-label">Pago</label>
+
+                <select
+                    class="form-control form-control-lg"
+                    aria-label="Default select example"
+                    v-model="getServicos.pago"
+                >
+                    <option>Todos</option>
+                    <option value="0">Não</option>
+                    <option value="1">Sim</option>
+                </select>
+            </div>
+            <div class="col-6">
+                <label class="form-label">Nome do Cliente</label>
                 <input
                     type="text"
                     class="form-control form-control-lg"
-                    placeholder="Nome do Cliente"
+                    v-model="getServicos.cliente"
                 />
             </div>
         </div>
@@ -47,16 +59,23 @@
 import { ref } from "vue";
 import { onMounted } from "@vue/runtime-core";
 import ServicosCard from "./ServicosCard.vue";
+
+import Datepicker from "vue3-datepicker";
+
 export default {
-    components: { ServicosCard },
+    components: { ServicosCard, Datepicker },
     setup() {
         const servicos = ref([]);
+        const getServicos = ref({
+            dataincial: new Date(),
+            datafinal: new Date(),
+            pago: "",
+            cliente: "",
+        });
+
         onMounted(() => {
             getservicos();
         });
-        const funcao =()=>{
-            
-        }
 
         const getservicos = () => {
             axios.get("servicos/getServico").then((resp) => {
@@ -64,7 +83,7 @@ export default {
             });
         };
 
-        return { servicos };
+        return { servicos, getServicos };
     },
 };
 </script>

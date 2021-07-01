@@ -107,6 +107,14 @@
                         />
                     </div>
                     <div class="mb-3">
+                        <label for="" class="form-label">Data Inicial</label>
+                        <datepicker
+                            class="form-control form-control-lg"
+                            v-model="data"
+                            :inputFormat="'dd/MM/yyyy'"
+                        />
+                    </div>
+                    <div class="mb-3">
                         <div class="row">
                             <div class="col-6">
                                 <label class="form-label">Preço</label>
@@ -163,12 +171,23 @@
 
 <script>
 import { ref } from "vue";
+import Datepicker from "vue3-datepicker";
+
 export default {
     props: ["cliente"],
     emits: ["mensagem"],
+    components: { Datepicker },
+
     setup(props, context) {
         const clienteInfo = ref({ nome: "", telefone: "", detalhes: "" });
-        const servico = ref({ pago: "", preco: "", servico: "", cliente: "" });
+        const servico = ref({
+            pago: "0",
+            preco: "0",
+            servico: "",
+            cliente: "",
+        });
+        const data = ref(new Date());
+
         let editatservicofd = new FormData();
         let servicofd = new FormData();
 
@@ -211,26 +230,28 @@ export default {
         const criarservicoform = (cliente) => {
             servico.value.cliente = cliente.nome;
             servico.value.id = cliente.id;
-
         };
 
         const criarservico = () => {
-            servicofd.append('pago', servico.value.pago)
-            servicofd.append('valor', servico.value.preco)
-            servicofd.append('servico', servico.value.servico)
-            servicofd.append('cliente_id', servico.value.id)
+            let datetime = new Date(data.value);
+            servicofd.append("pago", servico.value.pago);
+            servicofd.append("valor", servico.value.preco);
+            servicofd.append("data", datetime.toISOString());
+            servicofd.append("servico", servico.value.servico);
+            servicofd.append("cliente_id", servico.value.id);
 
-            servicofd.forEach(el => {
-                console.log(el)
+            servicofd.forEach((el) => {
+                console.log(el);
             });
 
-            axios.post('servicos/store', servicofd)
-            .then(resp =>{
-                context.emit('mensagem', resp.data)
-            })
-            .catch(err=>{
-                console.log(err)
-            })
+            axios
+                .post("servicos/store", servicofd)
+                .then((resp) => {
+                    context.emit("mensagem", resp.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         };
 
         return {
@@ -240,6 +261,7 @@ export default {
             clienteInfo,
             criarservicoform,
             servico,
+            data,
             criarservico,
         };
     },
