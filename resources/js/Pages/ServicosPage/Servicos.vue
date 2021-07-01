@@ -1,39 +1,57 @@
 <template>
     <div class="p-2">
-        <div class="row">
-            <div class="col-6">
-                <input
-                    type="text"
-                    class="form-control form-control-lg"
-                    placeholder="Data Inicial"
-                />
-            </div>
-            <div class="col-6">
-                <input
-                    type="text"
-                    class="form-control form-control-lg"
-                    placeholder="Data Final"
-                />
-            </div> 
+        <div class="col text-center p-2">
+            <h2>Serviços</h2>
         </div>
         <div class="row">
             <div class="col-6">
-                <input
-                    type="text"
+                <label for="" class="form-label">Data Inicial</label>
+                <datepicker
                     class="form-control form-control-lg"
-                    placeholder="Pago"
+                    v-model="datainicial"
+                    :inputFormat="'dd/MM/yyyy'"
+
                 />
             </div>
             <div class="col-6">
+                <label for="" class="form-label">Data Final</label>
+                <datepicker
+                    class="form-control form-control-lg"
+                    v-model="datafinal"
+                    :inputFormat="'dd/MM/yyyy'"
+
+                />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label class="form-label">Pago</label>
+
+                <select
+                    class="form-control form-control-lg"
+                    aria-label="Default select example"
+                    v-model="getServicos.pago"
+                    @change="getservico"
+                >
+                    <option :value="null">Todos</option>
+                    <option value="0">Não</option>
+                    <option value="1">Sim</option>
+                </select>
+            </div>
+            <div class="col-6">
+                <label class="form-label">Nome do Cliente</label>
                 <input
                     type="text"
                     class="form-control form-control-lg"
-                    placeholder="Nome do Cliente"
+                    v-model="getServicos.cliente"
+                    @keyup="getservico"
                 />
             </div>
         </div>
     </div>
-
+    <div class="col p-2">
+    <button class="btn btn-success btn-lg" @click="getservico">Pesquisar</button>
+    </div>
     <div class="row">
         <servicos-card
             :servicos="ser"
@@ -47,22 +65,57 @@
 import { ref } from "vue";
 import { onMounted } from "@vue/runtime-core";
 import ServicosCard from "./ServicosCard.vue";
+
+import Datepicker from "vue3-datepicker";
+
 export default {
-    components: { ServicosCard },
+    components: { ServicosCard, Datepicker },
     setup() {
         const servicos = ref([]);
-        onMounted(() => {
-            getservicos();
+        const datainicial = ref(new Date());
+        const datafinal = ref(new Date());
+
+        const getServicos = ref({
+            pago: "null",
+            cliente: "",
         });
 
+        onMounted(() => {
+            getservico();
+        });
 
-        const getservicos = () => {
-            axios.get("servicos/getServico").then((resp) => {
+        function datahandle(data) {
+            let date = new Date(data);
+            let dia = date.getDate();
+            let mes = date.getMonth();
+            let ano = date.getFullYear();
+            mes = mes + 1;
+            if (mes < 10) {
+                mes = "0" + mes;
+            }
+            if (dia < 10) {
+                dia = "0" + dia;
+            }
+            return ano + "-" + mes + "-" + dia;
+        }
+
+        const getservico = () => {
+            let dtinicial = datahandle(datainicial.value);
+            let dtfinal = datahandle(datafinal.value);
+
+            let fdservicos = new FormData();
+            fdservicos.append("datainicial", dtinicial);
+            fdservicos.append("datafinal", dtfinal);
+            fdservicos.append("pago", getServicos.value.pago);
+            fdservicos.append("cliente", getServicos.value.cliente);
+
+            axios.post("servicos/getServico", fdservicos).then((resp) => {
+                console.log(resp.data);
                 servicos.value = resp.data;
             });
         };
 
-        return { servicos };
+        return { servicos, getServicos, getservico, datainicial, datafinal };
     },
 };
 </script>
