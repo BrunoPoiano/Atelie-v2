@@ -6,7 +6,7 @@
     </nav>
     <div class="p-2">
         <div class="row m-0">
-            <div class="col-3 btn-group-vertical size">
+            <div class="col-lg-2 col-md-3 btn-group-vertical size">
                 <router-link
                     :to="{ name: 'Clientes' }"
                     class="btn btn-outline-success btn-lg"

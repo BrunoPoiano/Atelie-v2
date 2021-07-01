@@ -10,7 +10,6 @@
                     class="form-control form-control-lg"
                     v-model="datainicial"
                     :inputFormat="'dd/MM/yyyy'"
-
                 />
             </div>
             <div class="col-6">
@@ -19,7 +18,6 @@
                     class="form-control form-control-lg"
                     v-model="datafinal"
                     :inputFormat="'dd/MM/yyyy'"
-
                 />
             </div>
         </div>
@@ -50,7 +48,9 @@
         </div>
     </div>
     <div class="col p-2">
-    <button class="btn btn-success btn-lg" @click="getservico">Pesquisar</button>
+        <button class="btn btn-success btn-lg" @click="getservico">
+            Pesquisar
+        </button>
     </div>
     <div class="row">
         <servicos-card
@@ -67,6 +67,7 @@ import { onMounted } from "@vue/runtime-core";
 import ServicosCard from "./ServicosCard.vue";
 
 import Datepicker from "vue3-datepicker";
+import moment from "moment";
 
 export default {
     components: { ServicosCard, Datepicker },
@@ -110,8 +111,19 @@ export default {
             fdservicos.append("cliente", getServicos.value.cliente);
 
             axios.post("servicos/getServico", fdservicos).then((resp) => {
-                console.log(resp.data);
                 servicos.value = resp.data;
+
+                servicos.value.forEach((el) => {
+                    moment.locale("pt-br");
+                    el.time = moment(el.data).format("Do MMMM - YYYY ");
+                    if (el.pago == 0) {
+                        el.pagoexib = "Não";
+                    } else {
+                        el.pagoexib = "Sim";
+                    }
+                });
+
+                console.log(servicos.value);
             });
         };
 

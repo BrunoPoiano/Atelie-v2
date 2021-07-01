@@ -1,12 +1,11 @@
 <template>
-    <div class="col-sm-12 col-md-6 col-lg-4 p-2">
+    <div class="col-sm-12 col-md-6 col-lg-4 p-2 text-capitalize">
         <div
             :class="[
                 servicos.pago == 0 ? 'border-danger' : 'border-success',
                 'card',
             ]"
         >
-       
             <div
                 :class="[
                     servicos.pago == 0 ? 'bg-danger' : 'bg-success',
@@ -18,7 +17,10 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="row">
+                <div class="col p-2 text-center">
+                    <h3>{{ servicos.time }}</h3>
+                </div>
+                <div class="row p-1">
                     <div class="col-6">
                         <h3>R$: {{ servicos.valor }}</h3>
                     </div>
@@ -26,11 +28,11 @@
                         <h3>Pago: {{ servicos.pagoexib }}</h3>
                     </div>
                 </div>
-                <div class="col">
-                    <h4>{{ servicos.servico }}</h4>
+                <div class="col p-2">
+                    <p>{{ servicos.servico }}</p>
                 </div>
             </div>
-            <div class="card-footer ">
+            <div class="card-footer">
                 <div class="row p-2">
                     <div class="col-6 text-center">
                         <button class="btn btn-warning btn-lg">Editar</button>
@@ -49,13 +51,7 @@ import { onMounted } from "@vue/runtime-core";
 export default {
     props: ["servicos"],
     setup(props, context) {
-        onMounted(() => {
-            if (props.servicos.pago == 0) {
-                props.servicos.pagoexib = "Não";
-            } else {
-                props.servicos.pagoexib = "Sim";
-            }
-        });
+      
     },
 };
 </script>
@@ -63,5 +59,8 @@ export default {
 <style>
 div.card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+p{
+    font-size: 1.5rem;
 }
 </style>
