@@ -54,9 +54,7 @@ export default {
         onMounted(() => {
             getservicos();
         });
-        const funcao =()=>{
-            
-        }
+
 
         const getservicos = () => {
             axios.get("servicos/getServico").then((resp) => {
