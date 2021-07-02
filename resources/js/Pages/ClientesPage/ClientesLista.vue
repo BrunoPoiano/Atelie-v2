@@ -187,7 +187,6 @@ export default {
             cliente: "",
         });
         const data = ref(new Date());
-        const showModal = ref(none)
 
         let editatservicofd = new FormData();
         let servicofd = new FormData();
@@ -204,7 +203,6 @@ export default {
             editatservicofd.append("telefone", clienteInfo.value.telefone);
             editatservicofd.append("detalhes", clienteInfo.value.detalhes);
 
-            showModal.value = none;
             /*
             axios
                 .post(
@@ -267,7 +265,6 @@ export default {
             servico,
             data,
             criarservico,
-            showModal
         };
     },
 };

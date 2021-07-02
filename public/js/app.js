@@ -18036,7 +18036,6 @@ __webpack_require__.r(__webpack_exports__);
       cliente: ""
     });
     var data = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(new Date());
-    var showModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(none);
     var editatservicofd = new FormData();
     var servicofd = new FormData();
 
@@ -18051,7 +18050,6 @@ __webpack_require__.r(__webpack_exports__);
       editatservicofd.append("nome", clienteInfo.value.nome);
       editatservicofd.append("telefone", clienteInfo.value.telefone);
       editatservicofd.append("detalhes", clienteInfo.value.detalhes);
-      showModal.value = none;
       /*
       axios
           .post(
@@ -18107,8 +18105,7 @@ __webpack_require__.r(__webpack_exports__);
       criarservicoform: criarservicoform,
       servico: servico,
       data: data,
-      criarservico: criarservico,
-      showModal: showModal
+      criarservico: criarservico
     };
   }
 });
@@ -18684,7 +18681,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, " Apagar ")])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal editar Cliente "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
     "class": "modal fade",
     style: {
-      display: $setup.showModal
+      display: _ctx.showModal
     },
     id: "editarcliente",
     tabindex: "-1",
