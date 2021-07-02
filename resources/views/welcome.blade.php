@@ -16,7 +16,7 @@
 
 </head>
 
-<body class="antialiased" style=" background:rgb(233, 233, 233)">
+<body style=" background:rgb(233, 233, 233)">
     <div id="app">
         <layout />
     </div>

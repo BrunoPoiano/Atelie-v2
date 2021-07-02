@@ -2,27 +2,31 @@
     <div class="col-10 text-center">
         <h3>Clientes</h3>
     </div>
+    <!-- Button trigger modal -->
     <div class="col">
-        <!-- Button trigger modal -->
         <button
             type="button"
             class="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#formcliente"
+            @click="modalAddCliente = true"
         >
-            Adicionar Clientea
+            Adicionar Clientes
         </button>
     </div>
 
     <!-- Modal Add Cliente -->
-    <div class="modal fade" id="formcliente" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                  <div class="modal-title pt-3">
-                    <h5 class="text-center">Adicionar Clientes</h5>
+    <teleport to="body">
+        <div
+            class="modalcard"
+            v-if="modalAddCliente"
+            @click.self="modalAddCliente = false"
+        >
+            <div class="card">
+                <div class="col">
+                    <h3 class="text-center">Adicionar Clientes</h3>
                     <hr width="100%" align="center" />
                 </div>
-                <div class="modal-body input-group-lg">
+
+                <div class="input-group-lg">
                     <label class="form-label">Nome</label>
                     <input
                         type="text"
@@ -42,25 +46,29 @@
                         v-model="clienteInfo.detalhes"
                     />
                 </div>
-                <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-secondary btn-lg"
-                        data-bs-dismiss="modal"
-                    >
-                        Fechar
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-primary btn-lg"
-                        @click="AddClientes"
-                    >
-                        Adicionar
-                    </button>
+
+                <div class="row p-2">
+                    <div class="col pt-1">
+                        <button
+                            type="button"
+                            class="btn btn-warning btn-lg float-end m-1"
+                            @click="AddClientes"
+                        >
+                            Adicionar
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary btn-lg float-end m-1"
+                            @click="modalAddCliente = false"
+                            href="#top"
+                        >
+                            fechar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </teleport>
 </template>
 
 <script>
@@ -70,6 +78,8 @@ export default {
 
     setup(props, context) {
         const clienteInfo = ref({ nome: "", telefone: "", detalhes: "" });
+        const modalAddCliente = ref(false);
+
         let fd = new FormData();
 
         const AddClientes = () => {
@@ -80,6 +90,7 @@ export default {
             axios
                 .post("clientes/store", fd)
                 .then((resp) => {
+                    modalAddCliente.value = false;
                     context.emit("mensagem", resp.data);
                 })
                 .catch((err) => console.log(err));
@@ -88,6 +99,7 @@ export default {
         return {
             clienteInfo,
             AddClientes,
+            modalAddCliente,
         };
     },
 };
@@ -99,4 +111,5 @@ export default {
 }
 .modal-header {
     text-align: center;
-}</style>
+}
+</style>

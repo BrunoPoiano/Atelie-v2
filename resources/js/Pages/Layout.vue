@@ -30,6 +30,7 @@ export default {};
 </script>
 
 <style scoped>
+
 .size {
     margin-top: 5rem;
     height: 5rem;
