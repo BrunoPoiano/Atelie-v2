@@ -37,12 +37,14 @@ class ServicoController extends Controller
         if ($request) {
             $request->validate([
                 'valor' => 'numeric',
-                'created_at' => 'date|required',
+                'data' => 'date|required',
             ]);
             $upServico = Servicos::find($id);
-            $upServico->valor = $request->valor;
+            $upServico->valor = $request->preco;
             $upServico->pago = $request->pago;
             $upServico->servico = $request->servico;
+            $upServico->data = $request->data;
+            //return $upServico;
             $upServico->save();
             return 'Servico Atualizado com sucesso';
         }
@@ -54,14 +56,14 @@ class ServicoController extends Controller
         if ($request) {
 
             $key = trim($request->get('cliente'));
-            $dtinicio = new Carbon($request->datainicial);
+            $dtinicio = new Carbon($request->datainicial . '00:00:00');
             $dtfinal = new Carbon($request->datafinal . ' 23:59:59');
 
             $servicos = Servicos::join('clientes', 'clientes.id', 'servicos.cliente_id')
                 ->where('clientes.nome', 'like', "%{$key}%")
                 ->where('servicos.data', '>=', $dtinicio)
                 ->where('servicos.data', '<=', $dtfinal)
-                ->orderby('servicos.data', 'asc');
+                ->orderby('servicos.data', 'Asc');
 
             if ($request->pago == 'null') {
                 return $servicos->get(['servicos.*', 'clientes.nome']);
@@ -75,5 +77,15 @@ class ServicoController extends Controller
 
         }
         return 'Erro ao receber dados';
+    }
+
+    public function destroy($id)
+    {
+        $delServico = Servicos::find($id);
+        if($delServico){
+            $delServico->delete();
+            return 'Serviço Deletado com sucesso';
+        }
+        return 'Serviço não encontrado';
     }
 }

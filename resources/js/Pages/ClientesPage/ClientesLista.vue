@@ -14,28 +14,28 @@
                 </div>
                 <div class="col-4">
                     <div class="row float-end">
-                            <button
-                                class="btn btn-success"
-                                type="button"
-                                @click="criarservicoform(cliente)"
-                            >
-                                Criar Serviço
-                            </button>
+                        <button
+                            class="btn btn-success"
+                            type="button"
+                            @click="criarservicoform(cliente)"
+                        >
+                            Criar Serviço
+                        </button>
 
-                            <button
-                                class="btn btn-warning"
-                                type="button"
-                                @click="criareditarform(cliente)"
-                            >
-                                Editar
-                            </button>
+                        <button
+                            class="btn btn-warning"
+                            type="button"
+                            @click="criareditarform(cliente)"
+                        >
+                            Editar
+                        </button>
 
-                            <button
-                                class="btn btn-danger"
-                                @click="apagar(cliente.id)"
-                            >
-                                Apagar
-                            </button>
+                        <button
+                            class="btn btn-danger"
+                            @click="apagar(cliente.id)"
+                        >
+                            Apagar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -105,10 +105,10 @@
                         <div class="col pt-1">
                             <button
                                 type="button"
-                                class="btn btn-warning btn-lg float-end m-1"
+                                class="btn btn-success btn-lg float-end m-1"
                                 @click="criarservico"
                             >
-                                Editar
+                                Criar
                             </button>
                             <button
                                 type="button"
@@ -294,7 +294,6 @@ export default {
 <style>
 body {
     position: relative;
-    overflow-y: hidden;
 }
 .modalcard {
     position: fixed;

@@ -1,4 +1,7 @@
 <template>
+    <div class="text-center p-2 text-capitalize">
+        <h2>{{ mensagem }}</h2>
+    </div>
     <div class="p-2">
         <div class="col text-center p-2">
             <h2>Serviços</h2>
@@ -57,6 +60,7 @@
             :servicos="ser"
             v-for="(ser, index) in servicos"
             :key="index"
+            @mensagem="exibirmensagem"
         />
     </div>
 </template>
@@ -75,7 +79,7 @@ export default {
         const servicos = ref([]);
         const datainicial = ref(new Date());
         const datafinal = ref(new Date());
-
+        const mensagem = ref();
         const getServicos = ref({
             pago: "null",
             cliente: "",
@@ -127,7 +131,20 @@ export default {
             });
         };
 
-        return { servicos, getServicos, getservico, datainicial, datafinal };
+        const exibirmensagem = (mens) => {
+            mensagem.value = mens;
+            getservico();
+        };
+
+        return {
+            servicos,
+            getServicos,
+            getservico,
+            datainicial,
+            datafinal,
+            exibirmensagem,
+            mensagem,
+        };
     },
 };
 </script>

@@ -37,6 +37,7 @@
                     <input
                         type="number"
                         class="form-control"
+                        min="0"
                         v-model="clienteInfo.telefone"
                     />
                     <label class="form-label">Detalhes</label>
@@ -77,7 +78,7 @@ export default {
     emits: ["mensagem"],
 
     setup(props, context) {
-        const clienteInfo = ref({ nome: "", telefone: "", detalhes: "" });
+        const clienteInfo = ref({ nome: "", telefone: "0", detalhes: "" });
         const modalAddCliente = ref(false);
 
         let fd = new FormData();
