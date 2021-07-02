@@ -39,7 +39,7 @@
     </ul>
 
     <!-- Modal editar Cliente -->
-    <div class="modal fade" v-bind:style="{ display: showModal }" id="editarcliente" tabindex="-1" aria-hidden="true">
+    <div class="modal fade"  id="editarcliente" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-title pt-3">
