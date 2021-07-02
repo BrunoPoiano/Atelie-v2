@@ -17,6 +17,11 @@
                     class="btn btn-outline-success btn-lg"
                     >Servicos</router-link
                 >
+                <router-link
+                    :to="{ name: 'Saldo' }"
+                    class="btn btn-outline-success btn-lg"
+                    >Saldo</router-link
+                >
             </div>
             <div class="col boxshadow">
                 <router-view />
@@ -30,7 +35,6 @@ export default {};
 </script>
 
 <style scoped>
-
 .size {
     margin-top: 5rem;
     height: 5rem;
