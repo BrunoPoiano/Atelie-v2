@@ -18050,21 +18050,13 @@ __webpack_require__.r(__webpack_exports__);
       editatservicofd.append("nome", clienteInfo.value.nome);
       editatservicofd.append("telefone", clienteInfo.value.telefone);
       editatservicofd.append("detalhes", clienteInfo.value.detalhes);
-      /*
-      axios
-          .post(
-              "clientes/editar/" + clienteInfo.value.id,
-              editatservicofd
-          )
-          .then((resp) => {
-              context.emit("mensagem", resp.data);
-          })
-          .catch((err) => {
-              if (err.response.status == 422) {
-                  context.emit("mensagem", "Nome não pode ser vazio");
-              }
-          });
-          */
+      axios.post("clientes/editar/" + clienteInfo.value.id, editatservicofd).then(function (resp) {
+        context.emit("mensagem", resp.data);
+      })["catch"](function (err) {
+        if (err.response.status == 422) {
+          context.emit("mensagem", "Nome não pode ser vazio");
+        }
+      });
     };
 
     var apagar = function apagar(id) {

@@ -39,7 +39,7 @@
     </ul>
 
     <!-- Modal editar Cliente -->
-    <div class="modal fade"  id="editarcliente" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="editarcliente" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-title pt-3">
@@ -203,7 +203,6 @@ export default {
             editatservicofd.append("telefone", clienteInfo.value.telefone);
             editatservicofd.append("detalhes", clienteInfo.value.detalhes);
 
-            /*
             axios
                 .post(
                     "clientes/editar/" + clienteInfo.value.id,
@@ -217,7 +216,6 @@ export default {
                         context.emit("mensagem", "Nome não pode ser vazio");
                     }
                 });
-                */
         };
 
         const apagar = (id) => {
