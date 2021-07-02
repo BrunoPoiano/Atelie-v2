@@ -12,6 +12,8 @@
                 type="text"
                 class="form-control form-control-lg"
                 placeholder="Pesquise um Cliente"
+                v-model="cliente"
+                @keyup="getClientes"
             />
         </div>
         <br />
@@ -35,14 +37,17 @@ export default {
     setup() {
         const mensagem = ref();
         const clientes = ref([]);
+        const cliente = ref('');
+        let fd = new FormData();
 
         onMounted(() => {
             getClientes();
         });
 
         const getClientes = () => {
+            fd.append("cliente", cliente.value);
             axios
-                .get("/clientes/getClientes")
+                .post("/clientes/getClientes", fd)
                 .then((resp) => {
                     clientes.value = resp.data;
                 })
@@ -53,7 +58,7 @@ export default {
             getClientes();
         };
 
-        return { exibirmensagem, mensagem, clientes };
+        return { exibirmensagem, mensagem, clientes, getClientes, cliente };
     },
 };
 </script>

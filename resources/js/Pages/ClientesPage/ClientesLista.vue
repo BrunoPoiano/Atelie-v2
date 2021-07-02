@@ -39,7 +39,7 @@
     </ul>
 
     <!-- Modal editar Cliente -->
-    <div class="modal fade" id="editarcliente" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" v-bind:style="{ display: showModal }" id="editarcliente" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-title pt-3">
@@ -187,6 +187,7 @@ export default {
             cliente: "",
         });
         const data = ref(new Date());
+        const showModal = ref(none)
 
         let editatservicofd = new FormData();
         let servicofd = new FormData();
@@ -203,6 +204,8 @@ export default {
             editatservicofd.append("telefone", clienteInfo.value.telefone);
             editatservicofd.append("detalhes", clienteInfo.value.detalhes);
 
+            showModal.value = none;
+            /*
             axios
                 .post(
                     "clientes/editar/" + clienteInfo.value.id,
@@ -216,6 +219,7 @@ export default {
                         context.emit("mensagem", "Nome não pode ser vazio");
                     }
                 });
+                */
         };
 
         const apagar = (id) => {
@@ -263,6 +267,7 @@ export default {
             servico,
             data,
             criarservico,
+            showModal
         };
     },
 };

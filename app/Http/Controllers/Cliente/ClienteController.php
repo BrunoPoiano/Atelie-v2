@@ -29,9 +29,15 @@ class ClienteController extends Controller
         return 'Erro ao Receber Informações sobre Cliente';
     }
 
-    public function getClientes()
+    public function getClientes(Request $request)
     {
-        return Cliente::orderby('created_at', 'Desc')->get();
+        $key = trim($request->get('cliente'));
+
+        
+
+        return Cliente::orderby('created_at', 'Desc')
+            ->where('nome', 'like', "%{$key}%")
+            ->get();
     }
 
     public function apagar($id)
@@ -66,5 +72,5 @@ class ClienteController extends Controller
         }
         return 'Erro ao receber dados';
     }
-    
+
 }
