@@ -9,7 +9,14 @@
                     </div>
                     <h4>Tel: {{ cliente.telefone }}</h4>
                 </div>
-                <div class="col-4 text-center">
+                <div
+                    class="col-4 text-center text-centralized"
+                    style="
+                        word-wrap: break-word;
+                        min-width: 160px;
+                        max-width: 160px;
+                    "
+                >
                     <h4>{{ cliente.detalhes }}</h4>
                 </div>
                 <div class="col-4">

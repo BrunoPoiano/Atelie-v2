@@ -10,3 +10,5 @@ Route::get('/', function () {
 Route::prefix('/clientes')->name('clientes.')->group(base_path('routes/Clientes/Clientes.php'));
 
 Route::prefix('/servicos')->name('servicos.')->group(base_path('routes/Servicos/Servicos.php'));
+
+Route::prefix('/saldo')->name('saldo.')->group(base_path('routes/Saldo/Saldo.php'));

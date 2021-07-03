@@ -1,6 +1,6 @@
 <template>
-    <div class="col-10 text-center">
-        <h3>Clientes</h3>
+    <div class="col-lg-10 col-md-6 text-center">
+        <h1>Clientes</h1>
     </div>
     <!-- Button trigger modal -->
     <div class="col">
@@ -41,11 +41,8 @@
                         v-model="clienteInfo.telefone"
                     />
                     <label class="form-label">Detalhes</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        v-model="clienteInfo.detalhes"
-                    />
+                    <textarea cols="30"  class="form-control"  v-model="clienteInfo.detalhes"></textarea>
+              
                 </div>
 
                 <div class="row p-2">

@@ -1,67 +1,69 @@
 <template>
-    <div class="text-center p-2 text-capitalize">
-        <h2>{{ mensagem }}</h2>
-    </div>
-    <div class="p-2">
-        <div class="col text-center p-2">
-            <h2>Serviços</h2>
+    <div class="container">
+        <div class="text-center p-2 text-capitalize">
+            <h2>{{ mensagem }}</h2>
         </div>
-        <div class="row">
-            <div class="col-6">
-                <label for="" class="form-label">Data Inicial</label>
-                <datepicker
-                    class="form-control form-control-lg"
-                    v-model="datainicial"
-                    :inputFormat="'dd/MM/yyyy'"
-                />
+        <div class="p-2">
+            <div class="col text-center pb-2">
+                <h1>Serviços</h1>
             </div>
-            <div class="col-6">
-                <label for="" class="form-label">Data Final</label>
-                <datepicker
-                    class="form-control form-control-lg"
-                    v-model="datafinal"
-                    :inputFormat="'dd/MM/yyyy'"
-                />
+            <div class="row">
+                <div class="col-6">
+                    <label for="" class="form-label">Data Inicial</label>
+                    <datepicker
+                        class="form-control form-control-lg"
+                        v-model="datainicial"
+                        :inputFormat="'dd/MM/yyyy'"
+                    />
+                </div>
+                <div class="col-6">
+                    <label for="" class="form-label">Data Final</label>
+                    <datepicker
+                        class="form-control form-control-lg"
+                        v-model="datafinal"
+                        :inputFormat="'dd/MM/yyyy'"
+                    />
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <label class="form-label">Pago</label>
+            <div class="row">
+                <div class="col-6">
+                    <label class="form-label">Pago</label>
 
-                <select
-                    class="form-control form-control-lg"
-                    aria-label="Default select example"
-                    v-model="getServicos.pago"
-                    @change="getservico"
-                >
-                    <option :value="null">Todos</option>
-                    <option value="0">Não</option>
-                    <option value="1">Sim</option>
-                </select>
-            </div>
-            <div class="col-6">
-                <label class="form-label">Nome do Cliente</label>
-                <input
-                    type="text"
-                    class="form-control form-control-lg"
-                    v-model="getServicos.cliente"
-                    @keyup="getservico"
-                />
+                    <select
+                        class="form-control form-control-lg"
+                        aria-label="Default select example"
+                        v-model="getServicos.pago"
+                        @change="getservico"
+                    >
+                        <option :value="null">Todos</option>
+                        <option value="0">Não</option>
+                        <option value="1">Sim</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Nome do Cliente</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-lg"
+                        v-model="getServicos.cliente"
+                        @keyup="getservico"
+                    />
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col p-2">
-        <button class="btn btn-success btn-lg" @click="getservico">
-            Pesquisar
-        </button>
-    </div>
-    <div class="row">
-        <servicos-card
-            :servicos="ser"
-            v-for="(ser, index) in servicos"
-            :key="index"
-            @mensagem="exibirmensagem"
-        />
+        <div class="col p-2">
+            <button class="btn btn-success btn-lg" @click="getservico">
+                Pesquisar
+            </button>
+        </div>
+        <div class="row">
+            <servicos-card
+                :servicos="ser"
+                v-for="(ser, index) in servicos"
+                :key="index"
+                @mensagem="exibirmensagem"
+            />
+        </div>
     </div>
 </template>
 

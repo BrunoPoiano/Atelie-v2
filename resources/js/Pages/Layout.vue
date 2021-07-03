@@ -1,10 +1,11 @@
 <template>
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
-            <h2 class="navbar-text">Sistema Atelie</h2>
+            <h3 class="navbar-text ml-2">Sistema Atelie V2</h3>
         </div>
     </nav>
-    <div class="p-2">
+
+    <div class="links p-2">
         <div class="row m-0">
             <div class="col-lg-2 col-md-3 btn-group-vertical size">
                 <router-link
@@ -23,7 +24,7 @@
                     >Saldo</router-link
                 >
             </div>
-            <div class="col boxshadow">
+            <div class="col conteudo">
                 <router-view />
             </div>
         </div>
@@ -38,11 +39,36 @@ export default {};
 .size {
     margin-top: 5rem;
     height: 5rem;
+    position: fixed;
 }
-
-.boxshadow {
+.navbar {
+    background: rgba(255, 255, 255, 0.596);
+    color: rgb(0, 0, 0);
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+.links {
+    margin-top: 4rem;
+}
+.conteudo {
     margin-top: 1rem;
     background: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media only screen and (min-width: 768px) {
+     .conteudo {
+        margin-left: 12rem;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .conteudo {
+        margin-left: 13rem;
+    }
+}
+@media only screen and (min-width: 1323px) {
+    .conteudo {
+        margin-left: 19.5rem;
+    }
 }
 </style>

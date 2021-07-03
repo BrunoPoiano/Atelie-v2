@@ -38,13 +38,13 @@ class ServicoController extends Controller
             $request->validate([
                 'valor' => 'numeric',
                 'data' => 'date|required',
+                'servico'=>'nullable'
             ]);
             $upServico = Servicos::find($id);
             $upServico->valor = $request->preco;
             $upServico->pago = $request->pago;
             $upServico->servico = $request->servico;
             $upServico->data = $request->data;
-            //return $upServico;
             $upServico->save();
             return 'Servico Atualizado com sucesso';
         }
