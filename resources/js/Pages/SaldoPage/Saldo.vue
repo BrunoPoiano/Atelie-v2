@@ -1,26 +1,27 @@
 <template>
     <div class="container">
         <br />
-            <div class="col-lg-10 col-md-6 text-center">
-        <h1>Saldo</h1>
-    </div>
+        <div class="col-lg-10 col-md-6 text-center">
+            <h1>Saldo</h1>
+        </div>
         <div class="row">
-            <div class="col input-group-lg pt-4">
+            <div class="col input-group-lg align-self-center">
+                <h4 class="form-label">Ano Desejado</h4>
                 <input
                     type="number"
                     min="2010"
                     v-model="ano"
-                    class="form-control "
+                    class="form-control"
                     @change="testar"
                 />
             </div>
-            <div class="col-3">
+            <div class="col-3 align-self-center">
                 <div class="row">
-                        <h3 class="text-center fw-bold">{{ano}}</h3>
+                    <h3 class="text-center fw-bold">{{ ano }}</h3>
 
                     <div class="col p-0">
                         <div class="card text-success text-center">
-                            <span>Negativo </span>
+                            <span>Positivo </span>
                             <h4>R$: {{ total.positivo }}</h4>
                         </div>
                     </div>
@@ -44,7 +45,7 @@
                 <h4 class="text-danger">R$: {{ sld.devendo }}</h4>
             </div>
         </div>
-        <br>
+        <br />
     </div>
 </template>
 

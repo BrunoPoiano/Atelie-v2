@@ -19,7 +19,7 @@ class CreateServicosTable extends Migration
             $table->integer('valor')->nullable();
             $table->boolean('pago')->default(false);
             $table->timestamp('data');
-            $table->string('servico',500);
+            $table->string('servico',500)->nullable();;
             $table->timestamps();
         });
     }

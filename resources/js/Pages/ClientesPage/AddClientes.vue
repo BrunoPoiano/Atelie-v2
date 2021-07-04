@@ -3,7 +3,7 @@
         <h1>Clientes</h1>
     </div>
     <!-- Button trigger modal -->
-    <div class="col">
+    <div class="col align-self-center">
         <button
             type="button"
             class="btn btn-primary"

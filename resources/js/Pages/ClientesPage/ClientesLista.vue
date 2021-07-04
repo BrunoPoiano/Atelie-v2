@@ -19,16 +19,18 @@
                 >
                     <h4>{{ cliente.detalhes }}</h4>
                 </div>
-                <div class="col-4">
-                    <div class="row float-end">
-                        <button
-                            class="btn btn-success"
-                            type="button"
-                            @click="criarservicoform(cliente)"
-                        >
-                            Criar Serviço
-                        </button>
+                <div class="col align-self-center">
+                    <button
+                        class="btn btn-success p-3 float-end"
+                        type="button"
+                        @click="criarservicoform(cliente)"
+                    >
+                        Criar Serviço
+                    </button>
+                </div>
 
+                <div class="col">
+                    <div class="row float-end align-self-center">
                         <button
                             class="btn btn-warning"
                             type="button"

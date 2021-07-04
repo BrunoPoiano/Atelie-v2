@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="col p-2">
-                    <p>{{ servicos.servico }}</p>
+                    <p >{{ servicos.servico }}</p>
                 </div>
             </div>
             <div class="card-footer">

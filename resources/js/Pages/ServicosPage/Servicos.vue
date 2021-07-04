@@ -9,7 +9,7 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <label for="" class="form-label">Data Inicial</label>
+                    <h4 for="" class="form-label">Data Inicial</h4>
                     <datepicker
                         class="form-control form-control-lg"
                         v-model="datainicial"
@@ -17,7 +17,7 @@
                     />
                 </div>
                 <div class="col-6">
-                    <label for="" class="form-label">Data Final</label>
+                    <h4 for="" class="form-label">Data Final</h4>
                     <datepicker
                         class="form-control form-control-lg"
                         v-model="datafinal"
@@ -27,7 +27,7 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <label class="form-label">Pago</label>
+                    <h4 class="form-label">Pago</h4>
 
                     <select
                         class="form-control form-control-lg"
@@ -41,7 +41,7 @@
                     </select>
                 </div>
                 <div class="col-6">
-                    <label class="form-label">Nome do Cliente</label>
+                    <h4 class="form-label">Nome do Cliente</h4>
                     <input
                         type="text"
                         class="form-control form-control-lg"
@@ -118,6 +118,12 @@ export default {
 
             axios.post("servicos/getServico", fdservicos).then((resp) => {
                 servicos.value = resp.data;
+
+                servicos.value.forEach(el => {
+                    if(el.servico == 'null'){
+                        el.servico = '-'
+                    }
+                });
 
                 servicos.value.forEach((el) => {
                     moment.locale("pt-br");
