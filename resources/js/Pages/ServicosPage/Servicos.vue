@@ -1,10 +1,10 @@
 <template>
     <div class="container">
-
+        <br />
+        <div class="col text-center pb-2">
+            <h1>Serviços</h1>
+        </div>
         <div class="p-2">
-            <div class="col text-center pb-2">
-                <h1>Serviços</h1>
-            </div>
             <div class="row">
                 <div class="col-6">
                     <h4 for="" class="form-label">Data Inicial</h4>
@@ -116,9 +116,9 @@ export default {
             axios.post("servicos/getServico", fdservicos).then((resp) => {
                 servicos.value = resp.data;
 
-                servicos.value.forEach(el => {
-                    if(el.servico == 'null'){
-                        el.servico = '-'
+                servicos.value.forEach((el) => {
+                    if (el.servico == "null") {
+                        el.servico = "-";
                     }
                 });
 
