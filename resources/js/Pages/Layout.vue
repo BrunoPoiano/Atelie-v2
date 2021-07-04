@@ -25,17 +25,32 @@
                 >
             </div>
             <div class="col conteudo">
-                <router-view />
+                <router-view v-slot="{ Component }">
+                    <transition name="fade">
+                            <component :is="Component" />
+                    </transition>
+                </router-view>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+};
 </script>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.8s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
 .size {
     margin-top: 5rem;
     height: 5rem;
@@ -57,7 +72,7 @@ export default {};
 }
 
 @media only screen and (min-width: 768px) {
-     .conteudo {
+    .conteudo {
         margin-left: 12rem;
     }
 }

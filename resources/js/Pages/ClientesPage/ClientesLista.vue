@@ -53,76 +53,136 @@
 
     <!-- Modal Criar servico -->
     <teleport to="body">
-        <div
-            class="modalcard"
-            v-if="modalCriarServico"
-            @click.self="modalCriarServico = false"
-        >
-            <div class="card">
-                <div class="col">
-                    <h3 class="text-center">Criar Servico</h3>
-                    <hr width="100%" align="center" />
-                </div>
-
-                <div class="input-group-lg">
-                    <label class="form-label">Cliente</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        v-model="servico.cliente"
-                        disabled
-                    />
-                    <label for="" class="form-label">Data</label>
-                    <datepicker
-                        class="form-control form-control-lg"
-                        v-model="data"
-                        :inputFormat="'dd/MM/yyyy'"
-                    />
-                    <div class="row">
-                        <div class="col-6">
-                            <label class="form-label">Preço</label>
-                            <input
-                                type="number"
-                                min="0"
-                                v-model="servico.preco"
-                                class="form-control"
-                            />
-                        </div>
-                        <div class="col-6">
-                            <label class="form-label">Pago</label>
-
-                            <select
-                                class="form-select"
-                                aria-label="Default select example"
-                                v-model="servico.pago"
-                            >
-                                <option value="0">Não</option>
-                                <option value="1">Sim</option>
-                            </select>
-                        </div>
-                    </div>
+        <transition name="slide-fade">
+            <div
+                class="modalcard"
+                v-if="modalCriarServico"
+                @click.self="modalCriarServico = false"
+            >
+                <div class="card">
                     <div class="col">
-                        <label class="form-label">servico</label>
-                        <textarea
-                            class="form-control"
-                            v-model="servico.servico"
-                            rows="3"
-                        ></textarea>
+                        <h3 class="text-center">Criar Servico</h3>
+                        <hr width="100%" align="center" />
                     </div>
 
+                    <div class="input-group-lg">
+                        <label class="form-label">Cliente</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            v-model="servico.cliente"
+                            disabled
+                        />
+                        <label for="" class="form-label">Data</label>
+                        <datepicker
+                            class="form-control form-control-lg"
+                            v-model="data"
+                            :inputFormat="'dd/MM/yyyy'"
+                        />
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="form-label">Preço</label>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    v-model="servico.preco"
+                                    class="form-control"
+                                />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Pago</label>
+
+                                <select
+                                    class="form-select"
+                                    aria-label="Default select example"
+                                    v-model="servico.pago"
+                                >
+                                    <option value="0">Não</option>
+                                    <option value="1">Sim</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label class="form-label">servico</label>
+                            <textarea
+                                class="form-control"
+                                v-model="servico.servico"
+                                rows="3"
+                            ></textarea>
+                        </div>
+
+                        <div class="row p-2">
+                            <div class="col pt-1">
+                                <button
+                                    type="button"
+                                    class="btn btn-success btn-lg float-end m-1"
+                                    @click="criarservico"
+                                >
+                                    Criar
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-primary btn-lg float-end m-1"
+                                    @click="modalCriarServico = false"
+                                    href="#top"
+                                >
+                                    fechar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
+    </teleport>
+
+    <!-- Modal editar Cliente -->
+    <teleport to="body">
+        <transition name="slide-fade">
+            <div
+                class="modalcard"
+                v-if="modalEditar"
+                @click.self="modalEditar = false"
+            >
+                <div class="card">
+                    <div class="col">
+                        <h3 class="text-center">Editar Clientes</h3>
+                        <hr width="100%" align="center" />
+                    </div>
+
+                    <div class="input-group-lg">
+                        <label class="form-label">Nome</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            v-model="clienteInfo.nome"
+                        />
+                        <label class="form-label">Telefone</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            v-model="clienteInfo.telefone"
+                        />
+                        <label class="form-label">Detalhes</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            v-model="clienteInfo.detalhes"
+                        />
+                    </div>
                     <div class="row p-2">
                         <div class="col pt-1">
                             <button
                                 type="button"
-                                class="btn btn-success btn-lg float-end m-1"
-                                @click="criarservico"
+                                class="btn btn-warning btn-lg float-end m-1"
+                                @click="editarcliente"
                             >
-                                Criar
+                                Editar
                             </button>
                             <button
                                 type="button"
                                 class="btn btn-primary btn-lg float-end m-1"
-                                @click="modalCriarServico = false"
+                                @click="modalEditar = false"
                                 href="#top"
                             >
                                 fechar
@@ -131,63 +191,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </teleport>
-
-    <!-- Modal editar Cliente -->
-    <teleport to="body">
-        <div
-            class="modalcard"
-            v-if="modalEditar"
-            @click.self="modalEditar = false"
-        >
-            <div class="card">
-                <div class="col">
-                    <h3 class="text-center">Editar Clientes</h3>
-                    <hr width="100%" align="center" />
-                </div>
-
-                <div class="input-group-lg">
-                    <label class="form-label">Nome</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        v-model="clienteInfo.nome"
-                    />
-                    <label class="form-label">Telefone</label>
-                    <input
-                        type="number"
-                        class="form-control"
-                        v-model="clienteInfo.telefone"
-                    />
-                    <label class="form-label">Detalhes</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        v-model="clienteInfo.detalhes"
-                    />
-                </div>
-                <div class="row p-2">
-                    <div class="col pt-1">
-                        <button
-                            type="button"
-                            class="btn btn-warning btn-lg float-end m-1"
-                            @click="editarcliente"
-                        >
-                            Editar
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-primary btn-lg float-end m-1"
-                            @click="modalEditar = false"
-                            href="#top"
-                        >
-                            fechar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </transition>
     </teleport>
 </template>
 
@@ -235,12 +239,22 @@ export default {
                     editatservicofd
                 )
                 .then((resp) => {
-                    context.emit("mensagem", resp.data);
+                    if (resp.status == 200) {
+                        Swal.fire({
+                            icon: "success",
+                            position: "top-end",
+                            title: resp.data,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        context.emit("mensagem");
+                    }
+
                     modalEditar.value = false;
                 })
                 .catch((err) => {
                     if (err.response.status == 422) {
-                        context.emit("mensagem", "Nome não pode ser vazio");
+                        context.emit("mensagem");
                     }
                 });
         };
@@ -262,8 +276,11 @@ export default {
                         .then((resp) => {
                             if (resp.status == 200) {
                                 Swal.fire({
-                                    text: resp.data,
-                                    timer: 2000,
+                                    icon: "success",
+                                    position: "top-end",
+                                    title: resp.data,
+                                    showConfirmButton: false,
+                                    timer: 1500,
                                 });
                             }
                             context.emit("mensagem");
@@ -351,5 +368,20 @@ body {
     border-radius: 10px;
     width: 40rem;
     font-size: 1.5rem;
+}
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+    transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+    transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
 }
 </style>

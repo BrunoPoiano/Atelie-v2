@@ -57,85 +57,87 @@
 
     <!-- Modal Editar servico -->
     <teleport to="body">
-        <div
-            class="modalcard"
-            v-if="modalEditarServico"
-            @click.self="modalEditarServico = false"
-        >
-            <div class="card">
-                <div class="col">
-                    <h3 class="text-center">Criar Servico</h3>
-                    <hr width="100%" align="center" />
-                </div>
-
-                <div class="input-group-lg">
-                    <label class="form-label">Cliente</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        v-model="servico.cliente"
-                        disabled
-                    />
-                    <label for="" class="form-label">Data</label>
-                    <datepicker
-                        class="form-control form-control-lg"
-                        v-model="data"
-                        :inputFormat="'dd/MM/yyyy'"
-                    />
-                    <div class="row">
-                        <div class="col-6">
-                            <label class="form-label">Preço</label>
-                            <input
-                                type="number"
-                                min="0"
-                                v-model="servico.preco"
-                                class="form-control"
-                            />
-                        </div>
-                        <div class="col-6">
-                            <label class="form-label">Pago</label>
-
-                            <select
-                                class="form-select"
-                                aria-label="Default select example"
-                                v-model="servico.pago"
-                            >
-                                <option value="0">Não</option>
-                                <option value="1">Sim</option>
-                            </select>
-                        </div>
-                    </div>
+        <transition name="slide-fade">
+            <div
+                class="modalcard"
+                v-if="modalEditarServico"
+                @click.self="modalEditarServico = false"
+            >
+                <div class="card">
                     <div class="col">
-                        <label class="form-label">servico</label>
-                        <textarea
-                            class="form-control"
-                            v-model="servico.servico"
-                            rows="3"
-                        ></textarea>
+                        <h3 class="text-center">Editar Servico</h3>
+                        <hr width="100%" align="center" />
                     </div>
 
-                    <div class="row p-2">
-                        <div class="col pt-1">
-                            <button
-                                type="button"
-                                class="btn btn-warning btn-lg float-end m-1"
-                                @click="editarServico"
-                            >
-                                Editar
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-primary btn-lg float-end m-1"
-                                @click="modalEditarServico = false"
-                                href="#top"
-                            >
-                                fechar
-                            </button>
+                    <div class="input-group-lg">
+                        <label class="form-label">Cliente</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            v-model="servico.cliente"
+                            disabled
+                        />
+                        <label for="" class="form-label">Data</label>
+                        <datepicker
+                            class="form-control form-control-lg"
+                            v-model="data"
+                            :inputFormat="'dd/MM/yyyy'"
+                        />
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="form-label">Preço</label>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    v-model="servico.preco"
+                                    class="form-control"
+                                />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Pago</label>
+
+                                <select
+                                    class="form-select"
+                                    aria-label="Default select example"
+                                    v-model="servico.pago"
+                                >
+                                    <option value="0">Não</option>
+                                    <option value="1">Sim</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label class="form-label">servico</label>
+                            <textarea
+                                class="form-control"
+                                v-model="servico.servico"
+                                rows="3"
+                            ></textarea>
+                        </div>
+
+                        <div class="row p-2">
+                            <div class="col pt-1">
+                                <button
+                                    type="button"
+                                    class="btn btn-warning btn-lg float-end m-1"
+                                    @click="editarServico"
+                                >
+                                    Editar
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-primary btn-lg float-end m-1"
+                                    @click="modalEditarServico = false"
+                                    href="#top"
+                                >
+                                    fechar
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </transition>
     </teleport>
 </template>
 
@@ -195,9 +197,17 @@ export default {
             axios
                 .post("/servicos/update/" + servico.value.id, fd)
                 .then((resp) => {
-                    modalEditarServico.value = false;
+                    if (resp.status == 200) {
+                        Swal.fire({
+                            icon: 'success',
+                            position: "top-end",
+                            title: resp.data,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        modalEditarServico.value = false;
+                    }
                     context.emit("mensagem");
-                    console.log(resp.data);
                 });
         };
 
@@ -214,9 +224,12 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete("/servicos/destroy/" + id).then((resp) => {
-                        Swal.fire({
-                            text: resp.data,
-                            timer: 2000,
+                         Swal.fire({
+                            icon: 'success',
+                            position: "top-end",
+                            title: resp.data,
+                            showConfirmButton: false,
+                            timer: 1500,
                         });
                         context.emit("mensagem");
                         console.log(resp);
@@ -244,5 +257,21 @@ export default {
 }
 p {
     font-size: 1.5rem;
+}
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+    transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+    transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
 }
 </style>
