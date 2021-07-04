@@ -18147,7 +18147,11 @@ __webpack_require__.r(__webpack_exports__);
   components: {},
   setup: function setup() {
     var ano = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
-    var saldo = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
+    var saldomensal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
+    var total = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
+      positivo: 0,
+      negativo: 0
+    });
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       var dt = new Date();
       ano.value = dt.getFullYear();
@@ -18158,14 +18162,17 @@ __webpack_require__.r(__webpack_exports__);
       var fd = new FormData();
       fd.append("ano", ano.value);
       axios.post("saldo/saldo", fd).then(function (resp) {
-        saldo.value = resp.data;
+        saldomensal.value = resp.data.mensal;
+        total.value.positivo = resp.data.anual.positivo;
+        total.value.negativo = resp.data.anual.negativo;
       });
     };
 
     return {
       ano: ano,
       testar: testar,
-      saldo: saldo
+      saldomensal: saldomensal,
+      total: total
     };
   }
 });
@@ -19011,48 +19018,99 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 /* HOISTED */
 );
 
-var _hoisted_3 = {
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col-lg-10 col-md-6 text-center"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, "Saldo")], -1
+/* HOISTED */
+);
+
+var _hoisted_4 = {
   "class": "row"
 };
-var _hoisted_4 = {
-  "class": "col"
-};
 var _hoisted_5 = {
-  "class": "row p-2"
+  "class": "col input-group-lg pt-4"
 };
 var _hoisted_6 = {
-  "class": "text-success"
+  "class": "col-3"
 };
 var _hoisted_7 = {
+  "class": "row"
+};
+var _hoisted_8 = {
+  "class": "text-center fw-bold"
+};
+var _hoisted_9 = {
+  "class": "col p-0"
+};
+var _hoisted_10 = {
+  "class": "card text-success text-center"
+};
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, "Negativo ", -1
+/* HOISTED */
+);
+
+var _hoisted_12 = {
+  "class": "col p-0"
+};
+var _hoisted_13 = {
+  "class": "card text-danger text-center"
+};
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, "Negativo ", -1
+/* HOISTED */
+);
+
+var _hoisted_15 = {
+  "class": "row p-3"
+};
+var _hoisted_16 = {
+  "class": "text-center fw-bold"
+};
+var _hoisted_17 = {
+  "class": "text-success"
+};
+var _hoisted_18 = {
   "class": "text-danger"
 };
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_hoisted_2, _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "number",
     min: "2010",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $setup.ano = $event;
     }),
-    "class": "form-control",
+    "class": "form-control ",
     onChange: _cache[2] || (_cache[2] = function () {
       return $setup.testar && $setup.testar.apply($setup, arguments);
     })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.ano]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.saldo, function (sld, index) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.ano]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.ano), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", null, "R$: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.total.positivo), 1
+  /* TEXT */
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", null, "R$: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.total.negativo), 1
+  /* TEXT */
+  )])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.saldomensal, function (sld, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       "class": "card col-3",
       key: index
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(sld.mes), 1
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(sld.mes), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(sld.recebido), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", _hoisted_17, "R$: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(sld.recebido), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(sld.devendo), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", _hoisted_18, "R$: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(sld.devendo), 1
     /* TEXT */
     )]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]);
+  ))]), _hoisted_19]);
 }
 
 /***/ }),

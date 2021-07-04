@@ -10,40 +10,45 @@ class SaldoController extends Controller
 {
     public function saldo(Request $request)
     {
-        $saldo[1]['mes'] = 'Janeiro';
-        $saldo[2]['mes'] = 'Fevereiro';
-        $saldo[3]['mes'] = 'Março';
-        $saldo[4]['mes'] = 'Abril';
-        $saldo[5]['mes'] = 'Maio';
-        $saldo[6]['mes'] = 'Junho';
-        $saldo[7]['mes'] = 'Julho';
-        $saldo[8]['mes'] = 'Agosto';
-        $saldo[9]['mes'] = 'Setembro';
-        $saldo[10]['mes'] = 'Outubro';
-        $saldo[11]['mes'] = 'Novembro';
-        $saldo[12]['mes'] = 'Dezembro';
+        $mensal[1]['mes'] = 'Janeiro';
+        $mensal[2]['mes'] = 'Fevereiro';
+        $mensal[3]['mes'] = 'Março';
+        $mensal[4]['mes'] = 'Abril';
+        $mensal[5]['mes'] = 'Maio';
+        $mensal[6]['mes'] = 'Junho';
+        $mensal[7]['mes'] = 'Julho';
+        $mensal[8]['mes'] = 'Agosto';
+        $mensal[9]['mes'] = 'Setembro';
+        $mensal[10]['mes'] = 'Outubro';
+        $mensal[11]['mes'] = 'Novembro';
+        $mensal[12]['mes'] = 'Dezembro';
+        $anual['positivo'] = 0;
+        $anual['negativo'] = 0;
         for ($i = 1; $i < 10; $i++) {
-            $saldo[$i]['recebido'] = Servicos::where('data', '>=', $request->ano . '-' . '0' . $i . '-' . '01')
+            $mensal[$i]['recebido'] = Servicos::where('data', '>=', $request->ano . '-' . '0' . $i . '-' . '01')
                 ->where('data', '<=', $request->ano . '-' . '0' . $i . '-' . '31')
                 ->where('pago', true)
                 ->sum('valor');
-            $saldo[$i]['devendo'] = Servicos::where('data', '>=', $request->ano . '-' . '0' . $i . '-' . '01')
+            $mensal[$i]['devendo'] = Servicos::where('data', '>=', $request->ano . '-' . '0' . $i . '-' . '01')
                 ->where('data', '<=', $request->ano . '-' . '0' . $i . '-' . '31')
                 ->where('pago', false)
                 ->sum('valor');
+            $anual['positivo'] += $mensal[$i]['recebido'];
+            $anual['negativo'] += $mensal[$i]['devendo'];
         }
         for ($i = 10; $i < 13; $i++) {
-            $saldo[$i]['recebido'] = Servicos::where('data', '>=', $request->ano . '-' . $i . '-' . '01')
+            $mensal[$i]['recebido'] = Servicos::where('data', '>=', $request->ano . '-' . $i . '-' . '01')
                 ->where('data', '<=', $request->ano . '-' . $i . '-' . '31')
                 ->where('pago', true)
                 ->sum('valor');
-                $saldo[$i]['devendo'] = Servicos::where('data', '>=', $request->ano . '-' . $i . '-' . '01')
+            $mensal[$i]['devendo'] = Servicos::where('data', '>=', $request->ano . '-' . $i . '-' . '01')
                 ->where('data', '<=', $request->ano . '-' . $i . '-' . '31')
                 ->where('pago', false)
                 ->sum('valor');
+            $anual['positivo'] += $mensal[$i]['recebido'];
+            $anual['negativo'] += $mensal[$i]['devendo'];
         }
 
-        
-        return $saldo;
+        return ['mensal' => $mensal, 'anual' => $anual];
     }
 }
