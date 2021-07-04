@@ -1,8 +1,6 @@
 <template>
     <div class="container">
-        <div class="text-center p-2 text-capitalize">
-            <h2>{{ mensagem }}</h2>
-        </div>
+
         <div class="p-2">
             <div class="col text-center pb-2">
                 <h1>Serviços</h1>
@@ -81,7 +79,6 @@ export default {
         const servicos = ref([]);
         const datainicial = ref(new Date());
         const datafinal = ref(new Date());
-        const mensagem = ref();
         const getServicos = ref({
             pago: "null",
             cliente: "",
@@ -139,8 +136,7 @@ export default {
             });
         };
 
-        const exibirmensagem = (mens) => {
-            mensagem.value = mens;
+        const exibirmensagem = () => {
             getservico();
         };
 
@@ -151,7 +147,6 @@ export default {
             datainicial,
             datafinal,
             exibirmensagem,
-            mensagem,
         };
     },
 };

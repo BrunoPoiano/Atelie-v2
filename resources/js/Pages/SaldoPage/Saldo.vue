@@ -34,7 +34,8 @@
                 </div>
             </div>
         </div>
-        <div class="row p-3">
+        <br>
+        <div class="row p-3 boxshadowsaldo">
             <div
                 class="card col-3"
                 v-for="(sld, index) in saldomensal"
@@ -85,4 +86,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+.boxshadowsaldo {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.212),
+        0 6px 20px 0 rgba(0, 0, 0, 0.521);
+}</style>

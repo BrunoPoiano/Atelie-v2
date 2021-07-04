@@ -3,7 +3,7 @@
         <div
             :class="[
                 servicos.pago == 0 ? 'border-danger' : 'border-success',
-                'card',
+                'card boxshadow',
             ]"
         >
             <div
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="col p-2">
-                    <p >{{ servicos.servico }}</p>
+                    <p>{{ servicos.servico }}</p>
                 </div>
             </div>
             <div class="card-footer">
@@ -43,9 +43,12 @@
                         </button>
                     </div>
                     <div class="col-6 text-center">
-                        <button class="btn btn-danger btn-lg"
-                        @click="apagarServico(servicos.id)"
-                        >Excluir</button>
+                        <button
+                            class="btn btn-danger btn-lg"
+                            @click="apagarServico(servicos.id)"
+                        >
+                            Excluir
+                        </button>
                     </div>
                 </div>
             </div>
@@ -139,10 +142,12 @@
 <script>
 import { onMounted, ref } from "@vue/runtime-core";
 import Datepicker from "vue3-datepicker";
+import Swal from "sweetalert2";
 
 export default {
     props: ["servicos"],
-    components: { Datepicker },
+    components: { Datepicker, Swal },
+    emits: ["mensagem"],
     setup(props, context) {
         const modalEditarServico = ref(false);
         const servico = ref({ cliente: "", servico: "", preco: "", pago: "" });
@@ -191,18 +196,34 @@ export default {
                 .post("/servicos/update/" + servico.value.id, fd)
                 .then((resp) => {
                     modalEditarServico.value = false;
-                    context.emit("mensagem", resp.data);
+                    context.emit("mensagem");
                     console.log(resp.data);
                 });
         };
 
-        const apagarServico =(id)=>{
-            axios.delete('/servicos/destroy/'+id)
-            .then(resp =>{
-                context.emit('mensagem', resp.data)
-                console.log(resp)
-            })
-        }
+        const apagarServico = (id) => {
+            Swal.fire({
+                title: "Tem Certeza?",
+                text: "Deseja Apagar Esse Serviço?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Sim, Apagar!",
+                cancelButtonText: "Não.",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete("/servicos/destroy/" + id).then((resp) => {
+                        Swal.fire({
+                            text: resp.data,
+                            timer: 2000,
+                        });
+                        context.emit("mensagem");
+                        console.log(resp);
+                    });
+                }
+            });
+        };
 
         return {
             servico,
@@ -217,8 +238,9 @@ export default {
 </script>
 
 <style>
-div.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.521);
+.boxshadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.521);
 }
 p {
     font-size: 1.5rem;

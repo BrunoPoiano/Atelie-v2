@@ -194,11 +194,11 @@
 <script>
 import { ref } from "vue";
 import Datepicker from "vue3-datepicker";
-
+import Swal from "sweetalert2";
 export default {
     props: ["cliente"],
     emits: ["mensagem"],
-    components: { Datepicker },
+    components: { Datepicker, Swal },
 
     setup(props, context) {
         const clienteInfo = ref({ nome: "", telefone: "", detalhes: "" });
@@ -246,12 +246,31 @@ export default {
         };
 
         const apagar = (id) => {
-            axios
-                .delete("clientes/apagar/" + id)
-                .then((resp) => {
-                    context.emit("mensagem", resp.data);
-                })
-                .catch((err) => console.log(err));
+            Swal.fire({
+                title: "Tem Certeza?",
+                text: "Deseja apagar Cliente?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Sim, Apagar!",
+                cancelButtonText: "Não",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios
+                        .delete("clientes/apagar/" + id)
+                        .then((resp) => {
+                            if (resp.status == 200) {
+                                Swal.fire({
+                                    text: resp.data,
+                                    timer: 2000,
+                                });
+                            }
+                            context.emit("mensagem");
+                        })
+                        .catch((err) => console.log(err));
+                }
+            });
         };
 
         const criarservicoform = (cliente) => {
@@ -276,8 +295,17 @@ export default {
             axios
                 .post("servicos/store", servicofd)
                 .then((resp) => {
-                    modalCriarServico.value = false;
-                    context.emit("mensagem", resp.data);
+                    if ((resp.status = 200)) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Servico Criado Com Sucesso!",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        modalCriarServico.value = false;
+                        context.emit("mensagem");
+                    }
                 })
                 .catch((err) => {
                     console.log(err);

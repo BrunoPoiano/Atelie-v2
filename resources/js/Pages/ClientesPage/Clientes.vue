@@ -1,7 +1,5 @@
 <template>
-    <div class="text-center p-2 text-capitalize">
-        <h2>{{ mensagem }}</h2>
-    </div>
+ 
     <div class="container text-capitalize">
         <div class="row">
             <add-clientes @mensagem="exibirmensagem" />
@@ -35,7 +33,6 @@ import { onMounted, ref } from "vue";
 export default {
     components: { AddClientes, ClientesLista },
     setup() {
-        const mensagem = ref();
         const clientes = ref([]);
         const cliente = ref('');
         let fd = new FormData();
@@ -53,12 +50,11 @@ export default {
                 })
                 .catch((err) => console.log(err));
         };
-        const exibirmensagem = (mensa) => {
-            mensagem.value = mensa;
+        const exibirmensagem = () => {
             getClientes();
         };
 
-        return { exibirmensagem, mensagem, clientes, getClientes, cliente };
+        return { exibirmensagem, clientes, getClientes, cliente };
     },
 };
 </script>

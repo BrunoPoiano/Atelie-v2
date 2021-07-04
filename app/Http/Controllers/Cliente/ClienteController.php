@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cliente;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cliente\Cliente;
+use App\Models\Servicos\Servicos;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -33,8 +34,6 @@ class ClienteController extends Controller
     {
         $key = trim($request->get('cliente'));
 
-        
-
         return Cliente::orderby('created_at', 'Desc')
             ->where('nome', 'like', "%{$key}%")
             ->get();
@@ -43,12 +42,18 @@ class ClienteController extends Controller
     public function apagar($id)
     {
         if ($id) {
-            $apagarCliente = Cliente::find($id);
-            if ($apagarCliente) {
-                $apagarCliente->delete();
-                return 'Cliente apagado com sucesso';
+
+            $testeServico = Servicos::where('cliente_id', $id)->get();
+            if (count($testeServico)>1) {
+                return 'Cliente Possui Servicos, Não Pode Ser Apagado';
+            } else {
+                $apagarCliente = Cliente::find($id);
+                if ($apagarCliente) {
+                    $apagarCliente->delete();
+                    return 'Cliente apagado com sucesso';
+                }
+                return 'Cliente não encontrado';
             }
-            return 'Cliente não encontrado';
         }
         return "Erro ao Receber Informações";
     }
