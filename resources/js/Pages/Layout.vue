@@ -10,7 +10,7 @@
             <div class="col-lg-2 col-md-3 btn-group-vertical size">
                 <router-link
                     :to="{ name: 'Todo' }"
-                    class="btn btn-outline-success btn-lg"
+                    class="btn btn-outline-success btn-lg afazer"
                     >Afazeres</router-link
                 >
                 <router-link
@@ -45,6 +45,7 @@ export default {};
 </script>
 
 <style scoped>
+/*Transição entre paginas*/
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.8s ease;
@@ -55,6 +56,15 @@ export default {};
     opacity: 0;
 }
 
+
+.afazer{
+    color: #dc3545;
+    border-color: #dc3545;
+}
+.afazer:hover{
+    color:white;
+    background: #dc3545;
+}
 .size {
     margin-top: 5rem;
     height: 5rem;

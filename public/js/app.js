@@ -19237,7 +19237,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     to: {
       name: 'Todo'
     },
-    "class": "btn btn-outline-success btn-lg"
+    "class": "btn btn-outline-success btn-lg afazer"
   }, {
     "default": _withId(function () {
       return [_hoisted_5];
@@ -20300,7 +20300,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active[data-v-7edced13],\r\n.fade-leave-active[data-v-7edced13] {\r\n    transition: opacity 0.8s ease;\n}\n.fade-enter-from[data-v-7edced13],\r\n.fade-leave-to[data-v-7edced13] {\r\n    opacity: 0;\n}\n.size[data-v-7edced13] {\r\n    margin-top: 5rem;\r\n    height: 5rem;\r\n    position: fixed;\n}\n.navbar[data-v-7edced13] {\r\n    background: rgba(255, 255, 255, 0.596);\r\n    color: rgb(0, 0, 0);\r\n    border-bottom-left-radius: 0.5rem;\r\n    border-bottom-right-radius: 0.5rem;\n}\n.links[data-v-7edced13] {\r\n    margin-top: 4rem;\n}\n.conteudo[data-v-7edced13] {\r\n    margin-top: 1rem;\r\n    background: white;\r\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\n@media only screen and (min-width: 768px) {\n.conteudo[data-v-7edced13] {\r\n        margin-left: 12rem;\n}\n}\n@media only screen and (min-width: 1200px) {\n.conteudo[data-v-7edced13] {\r\n        margin-left: 13rem;\n}\n}\n@media only screen and (min-width: 1323px) {\n.conteudo[data-v-7edced13] {\r\n        margin-left: 19.5rem;\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n/*Transição entre paginas*/\n.fade-enter-active[data-v-7edced13],\r\n.fade-leave-active[data-v-7edced13] {\r\n    transition: opacity 0.8s ease;\n}\n.fade-enter-from[data-v-7edced13],\r\n.fade-leave-to[data-v-7edced13] {\r\n    opacity: 0;\n}\n.afazer[data-v-7edced13]{\r\n    color: #dc3545;\r\n    border-color: #dc3545;\n}\n.afazer[data-v-7edced13]:hover{\r\n    color:white;\r\n    background: #dc3545;\n}\n.size[data-v-7edced13] {\r\n    margin-top: 5rem;\r\n    height: 5rem;\r\n    position: fixed;\n}\n.navbar[data-v-7edced13] {\r\n    background: rgba(255, 255, 255, 0.596);\r\n    color: rgb(0, 0, 0);\r\n    border-bottom-left-radius: 0.5rem;\r\n    border-bottom-right-radius: 0.5rem;\n}\n.links[data-v-7edced13] {\r\n    margin-top: 4rem;\n}\n.conteudo[data-v-7edced13] {\r\n    margin-top: 1rem;\r\n    background: white;\r\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\n@media only screen and (min-width: 768px) {\n.conteudo[data-v-7edced13] {\r\n        margin-left: 12rem;\n}\n}\n@media only screen and (min-width: 1200px) {\n.conteudo[data-v-7edced13] {\r\n        margin-left: 13rem;\n}\n}\n@media only screen and (min-width: 1323px) {\n.conteudo[data-v-7edced13] {\r\n        margin-left: 19.5rem;\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
