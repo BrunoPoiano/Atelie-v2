@@ -56,7 +56,9 @@ export default {};
     opacity: 0;
 }
 
-
+.btn{
+    font-size: 1.5rem;
+}
 .afazer{
     color: #dc3545;
     border-color: #dc3545;
@@ -66,7 +68,7 @@ export default {};
     background: #dc3545;
 }
 .size {
-    margin-top: 5rem;
+    margin-top: 6rem;
     height: 5rem;
     position: fixed;
 }
