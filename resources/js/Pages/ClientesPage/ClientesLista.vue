@@ -245,7 +245,7 @@ export default {
                             position: "top-end",
                             title: resp.data,
                             showConfirmButton: false,
-                            timer: 1500,
+                            timer: 1000,
                         });
                         context.emit("mensagem");
                     }
@@ -280,7 +280,7 @@ export default {
                                     position: "top-end",
                                     title: resp.data,
                                     showConfirmButton: false,
-                                    timer: 1500,
+                                    timer: 1000,
                                 });
                             }
                             context.emit("mensagem");
@@ -318,7 +318,7 @@ export default {
                             icon: "success",
                             title: "Servico Criado Com Sucesso!",
                             showConfirmButton: false,
-                            timer: 1500,
+                            timer: 1000,
                         });
                         modalCriarServico.value = false;
                         context.emit("mensagem");
@@ -369,8 +369,8 @@ body {
     width: 40rem;
     font-size: 1.5rem;
 }
-/* Enter and leave animations can use different */
-/* durations and timing functions.              */
+
+/* Transição modal*/ 
 .slide-fade-enter-active {
     transition: all 0.3s ease-out;
 }

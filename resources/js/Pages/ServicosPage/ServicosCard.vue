@@ -1,5 +1,4 @@
 <template>
-    <div class="col-sm-12 col-md-6 col-lg-4 p-2 text-capitalize">
         <div
             :class="[
                 servicos.pago == 0 ? 'border-danger' : 'border-success',
@@ -52,7 +51,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
     <!-- Modal Editar servico -->
@@ -199,7 +197,7 @@ export default {
                 .then((resp) => {
                     if (resp.status == 200) {
                         Swal.fire({
-                            icon: 'success',
+                            icon: "success",
                             position: "top-end",
                             title: resp.data,
                             showConfirmButton: false,
@@ -224,8 +222,8 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete("/servicos/destroy/" + id).then((resp) => {
-                         Swal.fire({
-                            icon: 'success',
+                        Swal.fire({
+                            icon: "success",
                             position: "top-end",
                             title: resp.data,
                             showConfirmButton: false,
@@ -259,8 +257,7 @@ p {
     font-size: 1.5rem;
 }
 
-/* Enter and leave animations can use different */
-/* durations and timing functions.              */
+/* Transição MOdal */
 .slide-fade-enter-active {
     transition: all 0.3s ease-out;
 }

@@ -55,14 +55,17 @@
             </button>
         </div>
         <div class="row">
-            <servicos-card
-                :servicos="ser"
-                v-for="(ser, index) in servicos"
-                :key="index"
-                @mensagem="exibirmensagem"
-            />
+            <transition-group name="list">
+                <div
+                    class="col-sm-12 col-md-6 col-lg-4 p-2 text-capitalize"
+                    v-for="ser in servicos"
+                    :key="ser.id"
+                >
+                    <servicos-card :servicos="ser" @mensagem="exibirmensagem" />
+                </div>
+            </transition-group>
         </div>
-        <br>
+        <br />
     </div>
 </template>
 
@@ -132,8 +135,6 @@ export default {
                         el.pagoexib = "Sim";
                     }
                 });
-
-                console.log(servicos.value);
             });
         };
 
@@ -151,6 +152,18 @@ export default {
         };
     },
 };
+
 </script>
 
-<style></style>
+<style>
+/* Transição Servicos*/ 
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.8s ease;
+}
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}
+</style>

@@ -17,9 +17,13 @@
         </div>
         <br />
         <div v-if="clientes.length">
-            <div class="" v-for="(cli, index) in clientes" :key="index">
+            <transition-group name="list">
+
+            <div class="" v-for="cli, in clientes" :key="cli.id">
                 <clientes-lista :cliente="cli" @mensagem="exibirmensagem" />
             </div>
+            </transition-group>
+
         </div>
         <div v-else>
             <h1>Carregando...</h1>
@@ -60,4 +64,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+/* Transição Clientes*/ 
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.8s ease;
+}
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}
+</style>

@@ -44,7 +44,7 @@ class ClienteController extends Controller
         if ($id) {
 
             $testeServico = Servicos::where('cliente_id', $id)->get();
-            if (count($testeServico)>1) {
+            if (count($testeServico)>=1) {
                 return 'Cliente Possui Servicos, Não Pode Ser Apagado';
             } else {
                 $apagarCliente = Cliente::find($id);

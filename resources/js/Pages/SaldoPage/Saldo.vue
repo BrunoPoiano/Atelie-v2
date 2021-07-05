@@ -17,7 +17,9 @@
             </div>
             <div class="col-3 align-self-center">
                 <div class="row">
-                    <h3 class="text-center fw-bold">{{ ano }}</h3>
+                    <h3 class="text.dark text-center fw-bold">
+                        {{ ano }}
+                    </h3>
 
                     <div class="col p-0">
                         <div class="card text-success text-center">
@@ -34,14 +36,16 @@
                 </div>
             </div>
         </div>
-        <br>
+        <br />
         <div class="row p-3 boxshadowsaldo">
             <div
                 class="card col-3"
                 v-for="(sld, index) in saldomensal"
                 :key="index"
             >
-                <h4 class="text-center fw-bold">{{ sld.mes }}</h4>
+                <h4 class="text-center fw-bold">
+                    {{ sld.mes }}
+                </h4>
                 <h4 class="text-success">R$: {{ sld.recebido }}</h4>
                 <h4 class="text-danger">R$: {{ sld.devendo }}</h4>
             </div>
@@ -87,8 +91,8 @@ export default {
 </script>
 
 <style>
-
 .boxshadowsaldo {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.212),
         0 6px 20px 0 rgba(0, 0, 0, 0.521);
-}</style>
+}
+</style>
