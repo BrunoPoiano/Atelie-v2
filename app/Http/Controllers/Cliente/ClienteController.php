@@ -36,6 +36,7 @@ class ClienteController extends Controller
 
         return Cliente::orderby('created_at', 'Desc')
             ->where('nome', 'like', "%{$key}%")
+            ->limit(10)
             ->get();
     }
 
