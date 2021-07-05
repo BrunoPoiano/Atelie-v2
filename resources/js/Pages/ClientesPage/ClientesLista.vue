@@ -3,18 +3,18 @@
     <ul class="list-group list-group-flush root">
         <li class="list-group-item">
             <div class="row">
-                <div class="col-4 text-left">
-                    <div class="fw-bold">
+                <div class="col-2 text-left align-self-center">
+                    <div class="fw-bold ">
                         <h3>{{ cliente.nome }}</h3>
                     </div>
                     <h4>Tel: {{ cliente.telefone }}</h4>
                 </div>
                 <div
-                    class="col-4 text-center text-centralized"
+                    class="col text-center text-centralized"
                     style="
                         word-wrap: break-word;
-                        min-width: 160px;
-                        max-width: 160px;
+                        min-width: 25rem;
+                        max-width: 25rem;
                     "
                 >
                     <h4>{{ cliente.detalhes }}</h4>
@@ -29,8 +29,8 @@
                     </button>
                 </div>
 
-                <div class="col">
-                    <div class="row float-end align-self-center">
+                <div class="col align-self-center">
+                    <div class="row float-end ">
                         <button
                             class="btn btn-warning"
                             type="button"

@@ -2,7 +2,8 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 import Clientes from "../Pages/ClientesPage/Clientes";
 import Servicos from "../Pages/ServicosPage/Servicos.vue";
-import Saldo from '../Pages/SaldoPage/Saldo.vue'
+import Saldo from "../Pages/SaldoPage/Saldo.vue";
+import Todo from "../Pages/TodoPage/Todoapp.vue";
 
 const routes = [
     {
@@ -20,7 +21,11 @@ const routes = [
         name: "Saldo",
         component: Saldo,
     },
-
+    {
+        path: "/Todo",
+        name: "Todo",
+        component: Todo,
+    },
 ];
 
 const router = createRouter({

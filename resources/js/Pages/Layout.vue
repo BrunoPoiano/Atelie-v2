@@ -1,13 +1,18 @@
 <template>
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
-            <h3 class="navbar-text ml-2">Sistema Atelie V2</h3>
+            <h3 class="navbar-text ml-2">Dona Nalva V2</h3>
         </div>
     </nav>
 
     <div class="links p-2">
         <div class="row m-0">
             <div class="col-lg-2 col-md-3 btn-group-vertical size">
+                <router-link
+                    :to="{ name: 'Todo' }"
+                    class="btn btn-outline-success btn-lg"
+                    >Afazeres</router-link
+                >
                 <router-link
                     :to="{ name: 'Clientes' }"
                     class="btn btn-outline-success btn-lg"
@@ -26,8 +31,8 @@
             </div>
             <div class="col conteudo">
                 <router-view v-slot="{ Component }">
-                    <transition name="fade" mode="out-in"> 
-                            <component :is="Component" />
+                    <transition name="fade" mode="out-in">
+                        <component :is="Component" />
                     </transition>
                 </router-view>
             </div>
@@ -36,8 +41,7 @@
 </template>
 
 <script>
-export default {
-};
+export default {};
 </script>
 
 <style scoped>

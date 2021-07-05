@@ -22,7 +22,7 @@
                     </h3>
 
                     <div class="col p-0">
-                        <div class="card text-success text-center">
+                        <div class="card text-success text-center" >
                             <span>Positivo </span>
                             <h4>R$: {{ total.positivo }}</h4>
                         </div>
