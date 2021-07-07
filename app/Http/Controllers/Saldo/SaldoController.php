@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Saldo;
 
 use App\Http\Controllers\Controller;
 use App\Models\Servicos\Servicos;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SaldoController extends Controller
@@ -49,6 +50,11 @@ class SaldoController extends Controller
             $anual['negativo'] += $mensal[$i]['devendo'];
         }
 
-        return ['mensal' => $mensal, 'anual' => $anual];
+        $hoje = Servicos::where('data', '>=', Carbon::today()->toDateString().' 00:00:00')
+        ->where('data', '<=', Carbon::today()->toDateString().' 23:59:59')
+        ->where('pago', true)
+        ->sum('valor');
+
+        return ['mensal' => $mensal, 'anual' => $anual, 'hoje'=>$hoje];
     }
 }

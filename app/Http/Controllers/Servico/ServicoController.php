@@ -22,6 +22,7 @@ class ServicoController extends Controller
             $novoServico = new Servicos([
                 'cliente_id' => $request->cliente_id,
                 'valor' => $request->valor,
+                'gastos' => $request->gastos,
                 'pago' => $request->pago,
                 'data' => $data,
                 'servico' => $request->servico,
@@ -45,6 +46,7 @@ class ServicoController extends Controller
             $upServico->pago = $request->pago;
             $upServico->servico = $request->servico;
             $upServico->data = $request->data;
+            $upServico->gastos = $request->gastos;
             $upServico->save();
             return 'Servico Atualizado com sucesso';
         }

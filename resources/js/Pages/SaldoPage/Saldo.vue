@@ -12,25 +12,37 @@
                     min="2010"
                     v-model="ano"
                     class="form-control"
-                    @change="testar"
+                    @change="getano"
                 />
             </div>
-            <div class="col-3 align-self-center">
+            <div class="col-6 align-self-center">
                 <div class="row">
-                    <h3 class="text.dark text-center fw-bold">
-                        {{ ano }}
-                    </h3>
-
-                    <div class="col p-0">
-                        <div class="card text-success text-center" >
-                            <span>Positivo </span>
-                            <h4>R$: {{ total.positivo }}</h4>
+                    <div class="col-6">
+                        <h3 class="text.dark text-center fw-bold">Hoje</h3>
+                        <div class="card">
+                            <div class="card text-dark text-center">
+                                <h4 class="hoje">R$: {{ hoje }}</h4>
+                            </div>
                         </div>
                     </div>
-                    <div class="col p-0">
-                        <div class="card text-danger text-center">
-                            <span>Negativo </span>
-                            <h4>R$: {{ total.negativo }}</h4>
+                    <div class="col-6">
+                        <div class="row">
+                            <h3 class="text.dark text-center fw-bold">
+                                {{ ano }}
+                            </h3>
+
+                            <div class="col p-0">
+                                <div class="card text-success text-center">
+                                    <span>Positivo </span>
+                                    <h4>R$: {{ total.positivo }}</h4>
+                                </div>
+                            </div>
+                            <div class="col p-0">
+                                <div class="card text-danger text-center">
+                                    <span>Negativo </span>
+                                    <h4>R$: {{ total.negativo }}</h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -60,16 +72,17 @@ export default {
     components: {},
     setup() {
         const ano = ref();
+        const hoje = ref();
         const saldomensal = ref([]);
         const total = ref({ positivo: 0, negativo: 0 });
 
         onMounted(() => {
             let dt = new Date();
             ano.value = dt.getFullYear();
-            testar();
+            getano();
         });
 
-        const testar = () => {
+        const getano = () => {
             let fd = new FormData();
             fd.append("ano", ano.value);
 
@@ -77,12 +90,14 @@ export default {
                 saldomensal.value = resp.data.mensal;
                 total.value.positivo = resp.data.anual.positivo;
                 total.value.negativo = resp.data.anual.negativo;
+                hoje.value = resp.data.hoje;
             });
         };
 
         return {
             ano,
-            testar,
+            hoje,
+            getano,
             saldomensal,
             total,
         };
@@ -94,5 +109,8 @@ export default {
 .boxshadowsaldo {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.212),
         0 6px 20px 0 rgba(0, 0, 0, 0.521);
+}
+.hoje{
+    padding: 0.7rem;
 }
 </style>

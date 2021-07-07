@@ -4,7 +4,7 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-2 text-left align-self-center">
-                    <div class="fw-bold ">
+                    <div class="fw-bold">
                         <h3>{{ cliente.nome }}</h3>
                     </div>
                     <h4>Tel: {{ cliente.telefone }}</h4>
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="col align-self-center">
-                    <div class="row float-end ">
+                    <div class="row float-end">
                         <button
                             class="btn btn-warning"
                             type="button"
@@ -80,7 +80,7 @@
                             :inputFormat="'dd/MM/yyyy'"
                         />
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-4">
                                 <label class="form-label">Preço</label>
                                 <input
                                     type="number"
@@ -89,9 +89,18 @@
                                     class="form-control"
                                 />
                             </div>
-                            <div class="col-6">
-                                <label class="form-label">Pago</label>
+                            <div class="col-4">
+                                <label class="form-label">Gastos</label>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    v-model="servico.gastos"
+                                    class="form-control"
+                                />
+                            </div>
 
+                            <div class="col-4">
+                                <label class="form-label">Pago</label>
                                 <select
                                     class="form-select"
                                     aria-label="Default select example"
@@ -102,6 +111,7 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="col">
                             <label class="form-label">servico</label>
                             <textarea
@@ -209,6 +219,7 @@ export default {
         const servico = ref({
             pago: "0",
             preco: "0",
+            gastos: "0",
             servico: "",
             cliente: "",
         });
@@ -301,6 +312,7 @@ export default {
             let datetime = new Date(data.value);
             servicofd.append("pago", servico.value.pago);
             servicofd.append("valor", servico.value.preco);
+            servicofd.append("gastos", servico.value.gastos);
             servicofd.append("data", datetime.toISOString());
             servicofd.append("servico", servico.value.servico);
             servicofd.append("cliente_id", servico.value.id);
@@ -370,7 +382,7 @@ body {
     font-size: 1.5rem;
 }
 
-/* Transição modal*/ 
+/* Transição modal*/
 .slide-fade-enter-active {
     transition: all 0.3s ease-out;
 }

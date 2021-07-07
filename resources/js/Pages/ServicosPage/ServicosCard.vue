@@ -1,56 +1,64 @@
 <template>
+    <div
+        :class="[
+            servicos.pago == 0 ? 'border-danger' : 'border-success',
+            'card boxshadow',
+        ]"
+    >
         <div
             :class="[
-                servicos.pago == 0 ? 'border-danger' : 'border-success',
-                'card boxshadow',
+                servicos.pago == 0 ? 'bg-danger' : 'bg-success',
+                'card-header card text-white  mb-3',
             ]"
         >
-            <div
-                :class="[
-                    servicos.pago == 0 ? 'bg-danger' : 'bg-success',
-                    'card-header card text-white  mb-3',
-                ]"
-            >
-                <div class="col text-center p-2">
-                    <h2>{{ servicos.nome }}</h2>
+            <div class="col text-center p-2">
+                <h2>{{ servicos.nome }}</h2>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="col p-2 text-center">
+                <h3>{{ servicos.time }}</h3>
+            </div>
+            <div class="row p-1">
+                <div class="col-6">
+                    <h3>Serviço</h3>
+                    <h3>R$: {{ servicos.valor }}</h3>
+                </div>
+                <div class="col-6">
+                    <h3>Gastos</h3>
+                    <h3>R$: {{ servicos.gastos }}</h3>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="col p-2 text-center">
-                    <h3>{{ servicos.time }}</h3>
+            <div class="col">
+                <h3>Valor Final R$: {{ servicos.valorFinal }}</h3>
+            </div>
+            <div class="col">
+                <h3>Pago: {{ servicos.pagoexib }}</h3>
+            </div>
+            <div v-if="servicos.servico" class="col p-2">
+                <p>{{ servicos.servico }}</p>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row p-2">
+                <div class="col-6 text-center">
+                    <button
+                        class="btn btn-warning btn-lg"
+                        @click="criarEditarServicoForm(servicos)"
+                    >
+                        Editar
+                    </button>
                 </div>
-                <div class="row p-1">
-                    <div class="col-6">
-                        <h3>R$: {{ servicos.valor }}</h3>
-                    </div>
-                    <div class="col-6">
-                        <h3>Pago: {{ servicos.pagoexib }}</h3>
-                    </div>
-                </div>
-                <div class="col p-2">
-                    <p>{{ servicos.servico }}</p>
+                <div class="col-6 text-center">
+                    <button
+                        class="btn btn-danger btn-lg"
+                        @click="apagarServico(servicos.id)"
+                    >
+                        Excluir
+                    </button>
                 </div>
             </div>
-            <div class="card-footer">
-                <div class="row p-2">
-                    <div class="col-6 text-center">
-                        <button
-                            class="btn btn-warning btn-lg"
-                            @click="criarEditarServicoForm(servicos)"
-                        >
-                            Editar
-                        </button>
-                    </div>
-                    <div class="col-6 text-center">
-                        <button
-                            class="btn btn-danger btn-lg"
-                            @click="apagarServico(servicos.id)"
-                        >
-                            Excluir
-                        </button>
-                    </div>
-                </div>
-            </div>
+        </div>
     </div>
 
     <!-- Modal Editar servico -->
@@ -68,40 +76,56 @@
                     </div>
 
                     <div class="input-group-lg">
-                        <label class="form-label">Cliente</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            v-model="servico.cliente"
-                            disabled
-                        />
-                        <label for="" class="form-label">Data</label>
-                        <datepicker
-                            class="form-control form-control-lg"
-                            v-model="data"
-                            :inputFormat="'dd/MM/yyyy'"
-                        />
-                        <div class="row">
-                            <div class="col-6">
-                                <label class="form-label">Preço</label>
-                                <input
-                                    type="number"
-                                    min="0"
-                                    v-model="servico.preco"
-                                    class="form-control"
-                                />
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label">Pago</label>
+                        <div class="col">
+                            <label class="form-label">Cliente</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                v-model="servico.cliente"
+                                disabled
+                            />
+                        </div>
+                        <div class="col">
+                            <label for="" class="form-label">Data</label>
+                            <datepicker
+                                class="form-control form-control-lg"
+                                v-model="data"
+                                :inputFormat="'dd/MM/yyyy'"
+                            />
+                        </div>
 
-                                <select
-                                    class="form-select"
-                                    aria-label="Default select example"
-                                    v-model="servico.pago"
-                                >
-                                    <option value="0">Não</option>
-                                    <option value="1">Sim</option>
-                                </select>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="form-label">Preço</label>
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        v-model="servico.preco"
+                                        class="form-control"
+                                    />
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label">Gastos</label>
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        v-model="servico.gastos"
+                                        class="form-control"
+                                    />
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label">Pago</label>
+
+                                    <select
+                                        class="form-select"
+                                        aria-label="Default select example"
+                                        v-model="servico.pago"
+                                    >
+                                        <option value="0">Não</option>
+                                        <option value="1">Sim</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="col">
@@ -150,7 +174,13 @@ export default {
     emits: ["mensagem"],
     setup(props, context) {
         const modalEditarServico = ref(false);
-        const servico = ref({ cliente: "", servico: "", preco: "", pago: "" });
+        const servico = ref({
+            cliente: "",
+            servico: "",
+            preco: "",
+            gastos: "",
+            pago: "",
+        });
         const data = ref();
 
         let fd = new FormData();
@@ -178,6 +208,7 @@ export default {
             servico.value.cliente_id = serv.cliente_id;
             servico.value.servico = serv.servico;
             servico.value.preco = serv.valor;
+            servico.value.gastos = serv.gastos;
             servico.value.pago = serv.pago;
             data.value = new Date(serv.data);
         };
@@ -189,6 +220,7 @@ export default {
 
             fd.append("servico", servico.value.servico);
             fd.append("preco", servico.value.preco);
+            fd.append("gastos", servico.value.gastos);
             fd.append("data", dt);
             fd.append("pago", servico.value.pago);
 
