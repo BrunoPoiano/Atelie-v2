@@ -1,8 +1,8 @@
 <template>
     <div
         :class="[
-            servicos.pago == 0 ? 'border-danger' : 'border-success',
-            'card boxshadow',
+            servicos.pago == 0 ? 'border-danger boxshadowred' : 'border-success boxshadowgreen',
+            'card ',
         ]"
     >
         <div
@@ -281,10 +281,16 @@ export default {
 </script>
 
 <style>
-.boxshadow {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.521);
+.boxshadowred {
+    box-shadow: 5px 4px 8px 0 rgba(255, 23, 23, 0.555),
+        0 6px 20px 0 rgba(255, 37, 37, 0.521);
 }
+.boxshadowgreen {
+    box-shadow: 5px 4px 8px 0 rgba(9, 122, 5, 0.555),
+        0 6px 20px 0 rgba(4, 87, 1, 0.521);
+}
+
+
 p {
     font-size: 1.5rem;
 }

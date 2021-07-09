@@ -19847,7 +19847,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_datepicker = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("datepicker");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-    "class": [$props.servicos.pago == 0 ? 'border-danger' : 'border-success', 'card boxshadow']
+    "class": [$props.servicos.pago == 0 ? 'border-danger boxshadowred' : 'border-success boxshadowgreen', 'card ']
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
     "class": [$props.servicos.pago == 0 ? 'bg-danger' : 'bg-success', 'card-header card text-white  mb-3']
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.servicos.nome), 1
@@ -20479,7 +20479,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.boxshadow {\r\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),\r\n        0 6px 20px 0 rgba(0, 0, 0, 0.521);\n}\np {\r\n    font-size: 1.5rem;\n}\r\n\r\n/* Transição MOdal */\n.slide-fade-enter-active {\r\n    transition: all 0.3s ease-out;\n}\n.slide-fade-leave-active {\r\n    transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);\n}\n.slide-fade-enter-from,\r\n.slide-fade-leave-to {\r\n    transform: translateX(20px);\r\n    opacity: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.boxshadowred {\r\n    box-shadow: 5px 4px 8px 0 rgba(255, 23, 23, 0.555),\r\n        0 6px 20px 0 rgba(255, 37, 37, 0.521);\n}\n.boxshadowgreen {\r\n    box-shadow: 5px 4px 8px 0 rgba(9, 122, 5, 0.555),\r\n        0 6px 20px 0 rgba(4, 87, 1, 0.521);\n}\np {\r\n    font-size: 1.5rem;\n}\r\n\r\n/* Transição MOdal */\n.slide-fade-enter-active {\r\n    transition: all 0.3s ease-out;\n}\n.slide-fade-leave-active {\r\n    transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);\n}\n.slide-fade-enter-from,\r\n.slide-fade-leave-to {\r\n    transform: translateX(20px);\r\n    opacity: 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24613,14 +24613,14 @@ var quarterValues = {
 };
 var monthValues = {
   narrow: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
-  abbreviated: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-  wide: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+  abbreviated: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  wide: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 };
 var dayValues = {
-  narrow: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
-  short: ['Do', 'Se', 'Te', 'Qa', 'Qi', 'Se', 'Sa'],
-  abbreviated: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-  wide: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado']
+  narrow: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+  short: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+  abbreviated: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  wide: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 };
 var dayPeriodValues = {
   narrow: {
