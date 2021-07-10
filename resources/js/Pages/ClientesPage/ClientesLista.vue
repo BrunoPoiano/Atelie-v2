@@ -308,18 +308,29 @@ export default {
             servico.value.id = cliente.id;
         };
 
+        function datahandle(data) {
+            let date = new Date(data);
+            let dia = date.getDate();
+            let mes = date.getMonth();
+            let ano = date.getFullYear();
+            mes = mes + 1;
+            if (mes < 10) {
+                mes = "0" + mes;
+            }
+            if (dia < 10) {
+                dia = "0" + dia;
+            }
+            return ano + "-" + mes + "-" + dia + ' 12:00:00';
+        }
+
         const criarservico = () => {
-            let datetime = new Date(data.value);
+            let datetime = datahandle(data.value);
             servicofd.append("pago", servico.value.pago);
             servicofd.append("valor", servico.value.preco);
             servicofd.append("gastos", servico.value.gastos);
-            servicofd.append("data", datetime.toISOString());
+            servicofd.append("data", datetime);
             servicofd.append("servico", servico.value.servico);
             servicofd.append("cliente_id", servico.value.id);
-
-            servicofd.forEach((el) => {
-                console.log(el);
-            });
 
             axios
                 .post("servicos/store", servicofd)

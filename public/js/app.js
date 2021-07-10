@@ -18115,17 +18115,32 @@ __webpack_require__.r(__webpack_exports__);
       servico.value.id = cliente.id;
     };
 
+    function datahandle(data) {
+      var date = new Date(data);
+      var dia = date.getDate();
+      var mes = date.getMonth();
+      var ano = date.getFullYear();
+      mes = mes + 1;
+
+      if (mes < 10) {
+        mes = "0" + mes;
+      }
+
+      if (dia < 10) {
+        dia = "0" + dia;
+      }
+
+      return ano + "-" + mes + "-" + dia + ' 12:00:00';
+    }
+
     var criarservico = function criarservico() {
-      var datetime = new Date(data.value);
+      var datetime = datahandle(data.value);
       servicofd.append("pago", servico.value.pago);
       servicofd.append("valor", servico.value.preco);
       servicofd.append("gastos", servico.value.gastos);
-      servicofd.append("data", datetime.toISOString());
+      servicofd.append("data", datetime);
       servicofd.append("servico", servico.value.servico);
       servicofd.append("cliente_id", servico.value.id);
-      servicofd.forEach(function (el) {
-        console.log(el);
-      });
       axios.post("servicos/store", servicofd).then(function (resp) {
         if (resp.status = 200) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({

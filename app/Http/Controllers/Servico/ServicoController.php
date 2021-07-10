@@ -18,7 +18,6 @@ class ServicoController extends Controller
                 'valor' => 'numeric',
             ]);
             $data = new Carbon($request->data);
-
             $novoServico = new Servicos([
                 'cliente_id' => $request->cliente_id,
                 'valor' => $request->valor,
