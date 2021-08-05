@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
+    public function index()
+    {
+    }
+
+    public function create()
+    {
+    }
+
     public function store(Request $request)
     {
         if ($request) {
@@ -26,8 +34,34 @@ class TodoController extends Controller
         return 'erro';
     }
 
+    public function show($id)
+    {
+        //
+    }
+
+    public function edit($id)
+    {
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $up = Afazer::find($id);
+        $up->finalizado = !$up->finalizado;
+        $up->update();
+        return $up;
+    }
+
+    public function destroy($id)
+    {
+        $del = Afazer::find($id);
+        $del->delete();
+        return 'Afazer Deletado com sucesso';
+    }
+
     public function getprioridades()
     {
+        
         return Prioridade::get();
     }
 
@@ -47,20 +81,5 @@ class TodoController extends Controller
             ->orderby('afazers.prioridade', 'asc')->get(['afazers.*', 'prioridades.nome']);
 
         return $afazeres;
-    }
-
-    public function delete($id)
-    {
-        $del = Afazer::find($id);
-        $del->delete();
-        return 'Afazer Deletado com sucesso';
-    }
-
-    public function update($id)
-    {
-        $up = Afazer::find($id);
-        $up->finalizado = !$up->finalizado;
-        $up->update();
-        return $up;
     }
 }

@@ -34,6 +34,9 @@
                             class="form-control"
                             v-model="clienteInfo.nome"
                         />
+                        <div v-if="clienteInfo.nome.length == 0">
+                            <h5 class="text-danger"> Nome não pode ficar vazio</h5>
+                        </div>
                         <label class="form-label">Telefone</label>
                         <input
                             type="number"
@@ -76,6 +79,8 @@
 
 <script>
 import { ref } from "vue";
+import Swal from "sweetalert2";
+
 export default {
     emits: ["mensagem"],
 
@@ -91,12 +96,20 @@ export default {
             fd.append("detalhes", clienteInfo.value.detalhes);
 
             axios
-                .post("clientes/store", fd)
+                .post("clientes", fd)
                 .then((resp) => {
                     modalAddCliente.value = false;
                     context.emit("mensagem", resp.data);
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "Telefone Deve Ter Apenas Numeros!",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
+                });
         };
 
         return {
@@ -114,6 +127,9 @@ export default {
 }
 .modal-header {
     text-align: center;
+}
+.erro {
+    border-color: red;
 }
 
 /* Enter and leave animations can use different */

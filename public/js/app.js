@@ -17914,6 +17914,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   emits: ["mensagem"],
@@ -17930,11 +17933,17 @@ __webpack_require__.r(__webpack_exports__);
       fd.append("nome", clienteInfo.value.nome);
       fd.append("telefone", clienteInfo.value.telefone);
       fd.append("detalhes", clienteInfo.value.detalhes);
-      axios.post("clientes/store", fd).then(function (resp) {
+      axios.post("clientes", fd).then(function (resp) {
         modalAddCliente.value = false;
         context.emit("mensagem", resp.data);
       })["catch"](function (err) {
-        return console.log(err);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+          position: "top-end",
+          icon: "error",
+          title: "Telefone Deve Ter Apenas Numeros!",
+          showConfirmButton: false,
+          timer: 1000
+        });
       });
     };
 
@@ -17980,7 +17989,7 @@ __webpack_require__.r(__webpack_exports__);
 
     var getClientes = function getClientes() {
       fd.append("cliente", cliente.value);
-      axios.post("/clientes/getClientes", fd).then(function (resp) {
+      axios.post("clientes/getClientes", fd).then(function (resp) {
         clientes.value = resp.data;
       })["catch"](function (err) {
         return console.log(err);
@@ -18043,7 +18052,6 @@ __webpack_require__.r(__webpack_exports__);
     var data = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(new Date());
     var modalEditar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var modalCriarServico = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
-    var editatservicofd = new FormData();
     var servicofd = new FormData();
 
     var criareditarform = function criareditarform(cliente) {
@@ -18055,10 +18063,11 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var editarcliente = function editarcliente() {
-      editatservicofd.append("nome", clienteInfo.value.nome);
-      editatservicofd.append("telefone", clienteInfo.value.telefone);
-      editatservicofd.append("detalhes", clienteInfo.value.detalhes);
-      axios.post("clientes/editar/" + clienteInfo.value.id, editatservicofd).then(function (resp) {
+      axios.put("clientes/" + clienteInfo.value.id, {
+        nome: clienteInfo.value.nome,
+        telefone: clienteInfo.value.telefone,
+        detalhes: clienteInfo.value.detalhes
+      }).then(function (resp) {
         if (resp.status == 200) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
             icon: "success",
@@ -18072,9 +18081,13 @@ __webpack_require__.r(__webpack_exports__);
 
         modalEditar.value = false;
       })["catch"](function (err) {
-        if (err.response.status == 422) {
-          context.emit("mensagem");
-        }
+        sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+          position: "top-end",
+          icon: "error",
+          title: "Telefone Deve Ter Apenas Numeros!",
+          showConfirmButton: false,
+          timer: 1000
+        });
       });
     };
 
@@ -18090,7 +18103,7 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonText: "Não"
       }).then(function (result) {
         if (result.isConfirmed) {
-          axios["delete"]("clientes/apagar/" + id).then(function (resp) {
+          axios["delete"]("clientes/" + id).then(function (resp) {
             if (resp.status == 200) {
               sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
                 icon: "success",
@@ -18130,7 +18143,7 @@ __webpack_require__.r(__webpack_exports__);
         dia = "0" + dia;
       }
 
-      return ano + "-" + mes + "-" + dia + ' 12:00:00';
+      return ano + "-" + mes + "-" + dia + " 12:00:00";
     }
 
     var criarservico = function criarservico() {
@@ -18141,7 +18154,7 @@ __webpack_require__.r(__webpack_exports__);
       servicofd.append("data", datetime);
       servicofd.append("servico", servico.value.servico);
       servicofd.append("cliente_id", servico.value.id);
-      axios.post("servicos/store", servicofd).then(function (resp) {
+      axios.post("servicos", servicofd).then(function (resp) {
         if (resp.status = 200) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
             position: "top-end",
@@ -18222,7 +18235,7 @@ __webpack_require__.r(__webpack_exports__);
     var getano = function getano() {
       var fd = new FormData();
       fd.append("ano", ano.value);
-      axios.post("saldo/saldo", fd).then(function (resp) {
+      axios.post("saldo", fd).then(function (resp) {
         saldomensal.value = resp.data.mensal;
         total.value.positivo = resp.data.anual.positivo;
         total.value.negativo = resp.data.anual.negativo;
@@ -18309,7 +18322,7 @@ __webpack_require__.r(__webpack_exports__);
       fdservicos.append("cliente", getServicos.value.cliente);
       axios.post("servicos/getServico", fdservicos).then(function (resp) {
         servicos.value = resp.data;
-        console.log(resp.data);
+        console.log(resp);
         servicos.value.forEach(function (el) {
           if (el.servico == "null") {
             el.servico = "-";
@@ -18418,12 +18431,13 @@ __webpack_require__.r(__webpack_exports__);
     var editarServico = function editarServico() {
       console.log(servico.value);
       var dt = datahandle(data.value);
-      fd.append("servico", servico.value.servico);
-      fd.append("preco", servico.value.preco);
-      fd.append("gastos", servico.value.gastos);
-      fd.append("data", dt);
-      fd.append("pago", servico.value.pago);
-      axios.post("/servicos/update/" + servico.value.id, fd).then(function (resp) {
+      axios.put("servicos/" + servico.value.id, {
+        servico: servico.value.servico,
+        preco: servico.value.preco,
+        gastos: servico.value.gastos,
+        data: dt,
+        pago: servico.value.pago
+      }).then(function (resp) {
         if (resp.status == 200) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
             icon: "success",
@@ -18451,7 +18465,7 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonText: "Não."
       }).then(function (result) {
         if (result.isConfirmed) {
-          axios["delete"]("/servicos/destroy/" + id).then(function (resp) {
+          axios["delete"]("servicos/" + id).then(function (resp) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
               icon: "success",
               position: "top-end",
@@ -18515,7 +18529,7 @@ __webpack_require__.r(__webpack_exports__);
     });
 
     var getPrioridade = function getPrioridade() {
-      axios.get("todo/getprioridades").then(function (resp) {
+      axios.get("getprioridades").then(function (resp) {
         prioridade.value = resp.data;
         console.log(resp.data);
       })["catch"](function (err) {
@@ -18524,13 +18538,13 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var getafazeres = function getafazeres() {
-      axios.get("todo/getafazeres").then(function (resp) {
+      axios.get("getafazeres").then(function (resp) {
         afazeres.value = resp.data;
       });
     };
 
     var getafazeresfinalizados = function getafazeresfinalizados() {
-      axios.get("todo/getafazeresfinalizados").then(function (resp) {
+      axios.get("getafazeresfinalizados").then(function (resp) {
         afazeresfinalizados.value = resp.data;
       });
     };
@@ -18555,7 +18569,7 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         fd.append("prioridade", pid.value);
         fd.append("afazer", afazer.value);
-        axios.post("todo/store", fd).then(function (resp) {
+        axios.post("todo", fd).then(function (resp) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
             icon: "success",
             position: "top-end",
@@ -18579,7 +18593,7 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var concluido = function concluido(id) {
-      axios.put("todo/update/" + id).then(function (resp) {
+      axios.put("todo/" + id).then(function (resp) {
         if (resp.status == 200) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
             icon: "success",
@@ -18603,7 +18617,7 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var Apagar = function Apagar(id) {
-      axios["delete"]("todo/delete/" + id).then(function (resp) {
+      axios["delete"]("todo/" + id).then(function (resp) {
         if (resp.status == 200) {
           getafazeres();
           getafazeresfinalizados();
@@ -18689,22 +18703,32 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 /* HOISTED */
 );
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+var _hoisted_7 = {
+  key: 0
+};
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", {
+  "class": "text-danger"
+}, " Nome não pode ficar vazio", -1
+/* HOISTED */
+);
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "class": "form-label"
 }, "Telefone", -1
 /* HOISTED */
 );
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "class": "form-label"
 }, "Detalhes", -1
 /* HOISTED */
 );
 
-var _hoisted_9 = {
+var _hoisted_11 = {
   "class": "row p-2"
 };
-var _hoisted_10 = {
+var _hoisted_12 = {
   "class": "col pt-1"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -18734,7 +18758,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.clienteInfo.nome]]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.clienteInfo.nome]]), $setup.clienteInfo.nome.length == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_7, [_hoisted_8])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
         type: "number",
         "class": "form-control",
         min: "0",
@@ -18743,7 +18767,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.clienteInfo.telefone]]), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.clienteInfo.telefone]]), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
         cols: "30",
         "class": "form-control",
         "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
@@ -18751,7 +18775,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.clienteInfo.detalhes]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.clienteInfo.detalhes]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         type: "button",
         "class": "btn btn-warning btn-lg float-end m-1",
         onClick: _cache[5] || (_cache[5] = function () {
@@ -19034,22 +19058,32 @@ var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+var _hoisted_32 = {
+  key: 0
+};
+
+var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", {
+  "class": "text-danger"
+}, " Nome não pode ficar vazio ", -1
+/* HOISTED */
+);
+
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "class": "form-label"
 }, "Telefone", -1
 /* HOISTED */
 );
 
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "class": "form-label"
 }, "Detalhes", -1
 /* HOISTED */
 );
 
-var _hoisted_34 = {
+var _hoisted_36 = {
   "class": "row p-2"
 };
-var _hoisted_35 = {
+var _hoisted_37 = {
   "class": "col pt-1"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -19180,7 +19214,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.clienteInfo.nome]]), _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.clienteInfo.nome]]), $setup.clienteInfo.nome.length == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_32, [_hoisted_33])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
         type: "number",
         "class": "form-control",
         "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
@@ -19188,7 +19222,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.clienteInfo.telefone]]), _hoisted_33, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.clienteInfo.telefone]]), _hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
         type: "text",
         "class": "form-control",
         "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
@@ -19196,7 +19230,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.clienteInfo.detalhes]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.clienteInfo.detalhes]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         type: "button",
         "class": "btn btn-warning btn-lg float-end m-1",
         onClick: _cache[16] || (_cache[16] = function () {
@@ -20350,7 +20384,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal {\r\n    font-size: 1.5rem;\n}\n.modal-header {\r\n    text-align: center;\n}\r\n\r\n/* Enter and leave animations can use different */\r\n/* durations and timing functions.              */\n.slide-fade-enter-active {\r\n    transition: all 0.3s ease-out;\n}\n.slide-fade-leave-active {\r\n    transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);\n}\n.slide-fade-enter-from,\r\n.slide-fade-leave-to {\r\n    transform: translateX(20px);\r\n    opacity: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal {\r\n    font-size: 1.5rem;\n}\n.modal-header {\r\n    text-align: center;\n}\n.erro {\r\n    border-color: red;\n}\r\n\r\n/* Enter and leave animations can use different */\r\n/* durations and timing functions.              */\n.slide-fade-enter-active {\r\n    transition: all 0.3s ease-out;\n}\n.slide-fade-leave-active {\r\n    transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);\n}\n.slide-fade-enter-from,\r\n.slide-fade-leave-to {\r\n    transform: translateX(20px);\r\n    opacity: 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

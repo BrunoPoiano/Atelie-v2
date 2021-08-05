@@ -162,7 +162,7 @@ export default {
 
         const getPrioridade = () => {
             axios
-                .get("todo/getprioridades")
+                .get("getprioridades")
                 .then((resp) => {
                     prioridade.value = resp.data;
                     console.log(resp.data);
@@ -173,13 +173,13 @@ export default {
         };
 
         const getafazeres = () => {
-            axios.get("todo/getafazeres").then((resp) => {
+            axios.get("getafazeres").then((resp) => {
                 afazeres.value = resp.data;
             });
         };
 
         const getafazeresfinalizados = () => {
-            axios.get("todo/getafazeresfinalizados").then((resp) => {
+            axios.get("getafazeresfinalizados").then((resp) => {
                 afazeresfinalizados.value = resp.data;
             });
         };
@@ -206,7 +206,7 @@ export default {
                 fd.append("afazer", afazer.value);
 
                 axios
-                    .post("todo/store", fd)
+                    .post("todo", fd)
                     .then((resp) => {
                         Swal.fire({
                             icon: "success",
@@ -232,7 +232,7 @@ export default {
         };
 
         const concluido = (id) => {
-            axios.put("todo/update/" + id).then((resp) => {
+            axios.put("todo/" + id).then((resp) => {
                 if (resp.status == 200) {
                     Swal.fire({
                         icon: "success",
@@ -256,7 +256,7 @@ export default {
         };
 
         const Apagar = (id) => {
-            axios.delete("todo/delete/" + id).then((resp) => {
+            axios.delete("todo/" + id).then((resp) => {
                 if (resp.status == 200) {
                     getafazeres();
                     getafazeresfinalizados();

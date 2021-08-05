@@ -218,14 +218,14 @@ export default {
 
             let dt = datahandle(data.value);
 
-            fd.append("servico", servico.value.servico);
-            fd.append("preco", servico.value.preco);
-            fd.append("gastos", servico.value.gastos);
-            fd.append("data", dt);
-            fd.append("pago", servico.value.pago);
-
             axios
-                .post("/servicos/update/" + servico.value.id, fd)
+                .put("servicos/" + servico.value.id, {
+                    servico: servico.value.servico,
+                    preco: servico.value.preco,
+                    gastos: servico.value.gastos,
+                    data: dt,
+                    pago: servico.value.pago,
+                })
                 .then((resp) => {
                     if (resp.status == 200) {
                         Swal.fire({
@@ -253,7 +253,7 @@ export default {
                 cancelButtonText: "Não.",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete("/servicos/destroy/" + id).then((resp) => {
+                    axios.delete("servicos/" + id).then((resp) => {
                         Swal.fire({
                             icon: "success",
                             position: "top-end",

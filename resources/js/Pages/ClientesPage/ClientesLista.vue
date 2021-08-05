@@ -167,6 +167,11 @@
                             class="form-control"
                             v-model="clienteInfo.nome"
                         />
+                        <div v-if="clienteInfo.nome.length == 0">
+                            <h5 class="text-danger">
+                                Nome não pode ficar vazio
+                            </h5>
+                        </div>
                         <label class="form-label">Telefone</label>
                         <input
                             type="number"
@@ -228,7 +233,6 @@ export default {
         const modalEditar = ref(false);
         const modalCriarServico = ref(false);
 
-        let editatservicofd = new FormData();
         let servicofd = new FormData();
 
         const criareditarform = (cliente) => {
@@ -240,14 +244,15 @@ export default {
         };
 
         const editarcliente = () => {
-            editatservicofd.append("nome", clienteInfo.value.nome);
-            editatservicofd.append("telefone", clienteInfo.value.telefone);
-            editatservicofd.append("detalhes", clienteInfo.value.detalhes);
 
             axios
-                .post(
-                    "clientes/editar/" + clienteInfo.value.id,
-                    editatservicofd
+                .put(
+                    "clientes/" + clienteInfo.value.id,
+                   {
+                        nome: clienteInfo.value.nome,
+                        telefone: clienteInfo.value.telefone,
+                        detalhes: clienteInfo.value.detalhes,
+                   }
                 )
                 .then((resp) => {
                     if (resp.status == 200) {
@@ -264,9 +269,13 @@ export default {
                     modalEditar.value = false;
                 })
                 .catch((err) => {
-                    if (err.response.status == 422) {
-                        context.emit("mensagem");
-                    }
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "Telefone Deve Ter Apenas Numeros!",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    });
                 });
         };
 
@@ -283,7 +292,7 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios
-                        .delete("clientes/apagar/" + id)
+                        .delete("clientes/" + id)
                         .then((resp) => {
                             if (resp.status == 200) {
                                 Swal.fire({
@@ -320,7 +329,7 @@ export default {
             if (dia < 10) {
                 dia = "0" + dia;
             }
-            return ano + "-" + mes + "-" + dia + ' 12:00:00';
+            return ano + "-" + mes + "-" + dia + " 12:00:00";
         }
 
         const criarservico = () => {
@@ -333,7 +342,7 @@ export default {
             servicofd.append("cliente_id", servico.value.id);
 
             axios
-                .post("servicos/store", servicofd)
+                .post("servicos", servicofd)
                 .then((resp) => {
                     if ((resp.status = 200)) {
                         Swal.fire({

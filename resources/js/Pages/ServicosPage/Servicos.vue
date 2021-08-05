@@ -119,7 +119,7 @@ export default {
 
             axios.post("servicos/getServico", fdservicos).then((resp) => {
                 servicos.value = resp.data;
-                console.log(resp.data)
+                console.log(resp)
                 servicos.value.forEach((el) => {
                     if (el.servico == "null") {
                         el.servico = "-";

@@ -1,16 +1,24 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Cliente\ClienteController;
+use App\Http\Controllers\Saldo\SaldoController;
 use App\Http\Controllers\Servico\ServicoController;
+use App\Http\Controllers\Todo\TodoController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('/clientes')->name('clientes.')->group(base_path('routes/Clientes/Clientes.php'));
+Route::resource('clientes', ClienteController::class);
+Route::post('clientes/getClientes', [ClienteController::class, 'getClientes'])->name('getClientes');
 
-Route::prefix('/servicos')->name('servicos.')->group(base_path('routes/Servicos/Servicos.php'));
+Route::resource('servicos', ServicoController::class);
+Route::post('servicos/getServico', [ServicoController::class, 'getServico'])->name('getServico');
 
-Route::prefix('/saldo')->name('saldo.')->group(base_path('routes/Saldo/Saldo.php'));
+route::post('saldo', [SaldoController::class, 'saldo'])->name('saldo');
 
-Route::prefix('/todo')->name('todo.')->group(base_path('routes/Todo/Todo.php'));
+Route::resource('todo', TodoController::class);
+Route::get('getprioridades', [TodoController::class, 'getprioridades'])->name('getprioridades');
+Route::get('getafazeres', [TodoController::class, 'getafazeres'])->name('getafazeres');
+Route::get('getafazeresfinalizados', [TodoController::class, 'getafazeresfinalizados'])->name('getafazeresfinalizados');

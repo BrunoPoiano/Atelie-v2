@@ -86,7 +86,7 @@ export default {
             let fd = new FormData();
             fd.append("ano", ano.value);
 
-            axios.post("saldo/saldo", fd).then((resp) => {
+            axios.post("saldo", fd).then((resp) => {
                 saldomensal.value = resp.data.mensal;
                 total.value.positivo = resp.data.anual.positivo;
                 total.value.negativo = resp.data.anual.negativo;
