@@ -91,6 +91,7 @@
                                 class="form-control form-control-lg"
                                 v-model="data"
                                 :inputFormat="'dd/MM/yyyy'"
+                                style="background-color: white;"
                             />
                         </div>
 

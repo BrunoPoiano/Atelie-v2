@@ -78,6 +78,7 @@
                             class="form-control form-control-lg"
                             v-model="data"
                             :inputFormat="'dd/MM/yyyy'"
+                            style="background-color: white;"
                         />
                         <div class="row">
                             <div class="col-4">
@@ -113,7 +114,7 @@
                         </div>
 
                         <div class="col">
-                            <label class="form-label">servico</label>
+                            <label class="form-label">Serviços</label>
                             <textarea
                                 class="form-control"
                                 v-model="servico.servico"

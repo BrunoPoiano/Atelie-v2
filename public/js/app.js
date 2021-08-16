@@ -17936,6 +17936,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("api/clientes", fd).then(function (resp) {
         modalAddCliente.value = false;
         context.emit("mensagem", resp.data);
+        clienteInfo.value.nome = "";
+        clienteInfo.value.telefone = 0;
+        clienteInfo.value.detalhes = "";
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
           position: "top-end",
@@ -18328,7 +18331,8 @@ __webpack_require__.r(__webpack_exports__);
             el.servico = "-";
           }
 
-          el.valorFinal = el.valor + el.gastos;
+          el.valorFinal = parseInt(el.valor) + parseInt(el.gastos);
+          console.log('el.valorFinal ', el.valorFinal);
         });
         servicos.value.forEach(function (el) {
           moment__WEBPACK_IMPORTED_MODULE_3___default().locale("pt-br");
@@ -18709,7 +18713,7 @@ var _hoisted_7 = {
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", {
   "class": "text-danger"
-}, " Nome não pode ficar vazio", -1
+}, " Nome não pode ficar vazio ", -1
 /* HOISTED */
 );
 
@@ -18734,7 +18738,7 @@ var _hoisted_12 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button trigger modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     type: "button",
-    "class": "btn btn-primary",
+    "class": "btn btn-primary btn-lg",
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $setup.modalAddCliente = true;
     })
@@ -19023,7 +19027,7 @@ var _hoisted_24 = {
 
 var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "class": "form-label"
-}, "servico", -1
+}, "Serviços", -1
 /* HOISTED */
 );
 
@@ -19139,7 +19143,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
           return $setup.data = $event;
         }),
-        inputFormat: 'dd/MM/yyyy'
+        inputFormat: 'dd/MM/yyyy',
+        style: {
+          "background-color": "white"
+        }
       }, null, 8
       /* PROPS */
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
@@ -19661,7 +19668,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $setup.datainicial = $event;
     }),
-    inputFormat: 'dd/MM/yyyy'
+    inputFormat: 'dd/MM/yyyy',
+    style: {
+      "background-color": "white"
+    }
   }, null, 8
   /* PROPS */
   , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_datepicker, {
@@ -19670,7 +19680,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $setup.datafinal = $event;
     }),
-    inputFormat: 'dd/MM/yyyy'
+    inputFormat: 'dd/MM/yyyy',
+    style: {
+      "background-color": "white"
+    }
   }, null, 8
   /* PROPS */
   , ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
@@ -19954,7 +19967,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
           return $setup.data = $event;
         }),
-        inputFormat: 'dd/MM/yyyy'
+        inputFormat: 'dd/MM/yyyy',
+        style: {
+          "background-color": "white"
+        }
       }, null, 8
       /* PROPS */
       , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {

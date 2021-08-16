@@ -6,7 +6,7 @@
     <div class="col align-self-center">
         <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-primary btn-lg"
             @click="modalAddCliente = true"
         >
             Adicionar Clientes
@@ -35,7 +35,9 @@
                             v-model="clienteInfo.nome"
                         />
                         <div v-if="clienteInfo.nome.length == 0">
-                            <h5 class="text-danger"> Nome não pode ficar vazio</h5>
+                            <h5 class="text-danger">
+                                Nome não pode ficar vazio
+                            </h5>
                         </div>
                         <label class="form-label">Telefone</label>
                         <input
@@ -100,6 +102,9 @@ export default {
                 .then((resp) => {
                     modalAddCliente.value = false;
                     context.emit("mensagem", resp.data);
+                    clienteInfo.value.nome = "";
+                    clienteInfo.value.telefone = 0;
+                    clienteInfo.value.detalhes = "";
                 })
                 .catch((err) => {
                     Swal.fire({

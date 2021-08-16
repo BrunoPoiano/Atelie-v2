@@ -12,6 +12,7 @@
                         class="form-control form-control-lg"
                         v-model="datainicial"
                         :inputFormat="'dd/MM/yyyy'"
+                        style="background-color: white;"
                     />
                 </div>
                 <div class="col-6">
@@ -20,6 +21,7 @@
                         class="form-control form-control-lg"
                         v-model="datafinal"
                         :inputFormat="'dd/MM/yyyy'"
+                        style="background-color: white;"
                     />
                 </div>
             </div>
@@ -124,7 +126,8 @@ export default {
                     if (el.servico == "null") {
                         el.servico = "-";
                     }
-                    el.valorFinal = el.valor + el.gastos
+                    el.valorFinal = parseInt(el.valor) + parseInt(el.gastos)
+                    console.log('el.valorFinal ', el.valorFinal)
                 });
 
                 servicos.value.forEach((el) => {
