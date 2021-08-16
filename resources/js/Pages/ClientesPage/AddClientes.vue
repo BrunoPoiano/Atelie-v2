@@ -96,7 +96,7 @@ export default {
             fd.append("detalhes", clienteInfo.value.detalhes);
 
             axios
-                .post("clientes", fd)
+                .post("api/clientes", fd)
                 .then((resp) => {
                     modalAddCliente.value = false;
                     context.emit("mensagem", resp.data);

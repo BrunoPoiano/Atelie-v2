@@ -247,7 +247,7 @@ export default {
 
             axios
                 .put(
-                    "clientes/" + clienteInfo.value.id,
+                    "api/clientes/" + clienteInfo.value.id,
                    {
                         nome: clienteInfo.value.nome,
                         telefone: clienteInfo.value.telefone,
@@ -292,7 +292,7 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios
-                        .delete("clientes/" + id)
+                        .delete("api/clientes/" + id)
                         .then((resp) => {
                             if (resp.status == 200) {
                                 Swal.fire({
@@ -342,7 +342,7 @@ export default {
             servicofd.append("cliente_id", servico.value.id);
 
             axios
-                .post("servicos", servicofd)
+                .post("api/servicos", servicofd)
                 .then((resp) => {
                     if ((resp.status = 200)) {
                         Swal.fire({

@@ -17933,7 +17933,7 @@ __webpack_require__.r(__webpack_exports__);
       fd.append("nome", clienteInfo.value.nome);
       fd.append("telefone", clienteInfo.value.telefone);
       fd.append("detalhes", clienteInfo.value.detalhes);
-      axios.post("clientes", fd).then(function (resp) {
+      axios.post("api/clientes", fd).then(function (resp) {
         modalAddCliente.value = false;
         context.emit("mensagem", resp.data);
       })["catch"](function (err) {
@@ -17989,7 +17989,7 @@ __webpack_require__.r(__webpack_exports__);
 
     var getClientes = function getClientes() {
       fd.append("cliente", cliente.value);
-      axios.post("clientes/getClientes", fd).then(function (resp) {
+      axios.post("api/clientes/getClientes", fd).then(function (resp) {
         clientes.value = resp.data;
       })["catch"](function (err) {
         return console.log(err);
@@ -18063,7 +18063,7 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var editarcliente = function editarcliente() {
-      axios.put("clientes/" + clienteInfo.value.id, {
+      axios.put("api/clientes/" + clienteInfo.value.id, {
         nome: clienteInfo.value.nome,
         telefone: clienteInfo.value.telefone,
         detalhes: clienteInfo.value.detalhes
@@ -18103,7 +18103,7 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonText: "Não"
       }).then(function (result) {
         if (result.isConfirmed) {
-          axios["delete"]("clientes/" + id).then(function (resp) {
+          axios["delete"]("api/clientes/" + id).then(function (resp) {
             if (resp.status == 200) {
               sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
                 icon: "success",
@@ -18154,7 +18154,7 @@ __webpack_require__.r(__webpack_exports__);
       servicofd.append("data", datetime);
       servicofd.append("servico", servico.value.servico);
       servicofd.append("cliente_id", servico.value.id);
-      axios.post("servicos", servicofd).then(function (resp) {
+      axios.post("api/servicos", servicofd).then(function (resp) {
         if (resp.status = 200) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
             position: "top-end",
@@ -18235,7 +18235,7 @@ __webpack_require__.r(__webpack_exports__);
     var getano = function getano() {
       var fd = new FormData();
       fd.append("ano", ano.value);
-      axios.post("saldo", fd).then(function (resp) {
+      axios.post("api/saldo", fd).then(function (resp) {
         saldomensal.value = resp.data.mensal;
         total.value.positivo = resp.data.anual.positivo;
         total.value.negativo = resp.data.anual.negativo;
@@ -18320,7 +18320,7 @@ __webpack_require__.r(__webpack_exports__);
       fdservicos.append("datafinal", dtfinal);
       fdservicos.append("pago", getServicos.value.pago);
       fdservicos.append("cliente", getServicos.value.cliente);
-      axios.post("servicos/getServico", fdservicos).then(function (resp) {
+      axios.post("api/servicos/getServico", fdservicos).then(function (resp) {
         servicos.value = resp.data;
         console.log(resp);
         servicos.value.forEach(function (el) {
@@ -18431,7 +18431,7 @@ __webpack_require__.r(__webpack_exports__);
     var editarServico = function editarServico() {
       console.log(servico.value);
       var dt = datahandle(data.value);
-      axios.put("servicos/" + servico.value.id, {
+      axios.put("api/servicos/" + servico.value.id, {
         servico: servico.value.servico,
         preco: servico.value.preco,
         gastos: servico.value.gastos,
@@ -18465,7 +18465,7 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonText: "Não."
       }).then(function (result) {
         if (result.isConfirmed) {
-          axios["delete"]("servicos/" + id).then(function (resp) {
+          axios["delete"]("api/servicos/" + id).then(function (resp) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
               icon: "success",
               position: "top-end",
@@ -18529,7 +18529,7 @@ __webpack_require__.r(__webpack_exports__);
     });
 
     var getPrioridade = function getPrioridade() {
-      axios.get("getprioridades").then(function (resp) {
+      axios.get("api/getprioridades").then(function (resp) {
         prioridade.value = resp.data;
         console.log(resp.data);
       })["catch"](function (err) {
@@ -18538,13 +18538,13 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var getafazeres = function getafazeres() {
-      axios.get("getafazeres").then(function (resp) {
+      axios.get("api/getafazeres").then(function (resp) {
         afazeres.value = resp.data;
       });
     };
 
     var getafazeresfinalizados = function getafazeresfinalizados() {
-      axios.get("getafazeresfinalizados").then(function (resp) {
+      axios.get("api/getafazeresfinalizados").then(function (resp) {
         afazeresfinalizados.value = resp.data;
       });
     };
@@ -18569,7 +18569,7 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         fd.append("prioridade", pid.value);
         fd.append("afazer", afazer.value);
-        axios.post("todo", fd).then(function (resp) {
+        axios.post("api/todo", fd).then(function (resp) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
             icon: "success",
             position: "top-end",
@@ -18593,7 +18593,7 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var concluido = function concluido(id) {
-      axios.put("todo/" + id).then(function (resp) {
+      axios.put("api/todo/" + id).then(function (resp) {
         if (resp.status == 200) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
             icon: "success",
@@ -18617,7 +18617,7 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var Apagar = function Apagar(id) {
-      axios["delete"]("todo/" + id).then(function (resp) {
+      axios["delete"]("api/todo/" + id).then(function (resp) {
         if (resp.status == 200) {
           getafazeres();
           getafazeresfinalizados();
@@ -20308,7 +20308,7 @@ var routes = [{
   component: _Pages_TodoPage_Todoapp_vue__WEBPACK_IMPORTED_MODULE_3__.default
 }];
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.createRouter)({
-  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.createWebHashHistory)(),
+  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.createWebHistory)(),
   routes: routes
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);

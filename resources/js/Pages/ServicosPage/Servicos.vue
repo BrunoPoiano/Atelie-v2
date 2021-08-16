@@ -117,7 +117,7 @@ export default {
             fdservicos.append("pago", getServicos.value.pago);
             fdservicos.append("cliente", getServicos.value.cliente);
 
-            axios.post("servicos/getServico", fdservicos).then((resp) => {
+            axios.post("api/servicos/getServico", fdservicos).then((resp) => {
                 servicos.value = resp.data;
                 console.log(resp)
                 servicos.value.forEach((el) => {

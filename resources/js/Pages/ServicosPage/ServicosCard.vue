@@ -219,7 +219,7 @@ export default {
             let dt = datahandle(data.value);
 
             axios
-                .put("servicos/" + servico.value.id, {
+                .put("api/servicos/" + servico.value.id, {
                     servico: servico.value.servico,
                     preco: servico.value.preco,
                     gastos: servico.value.gastos,
@@ -253,7 +253,7 @@ export default {
                 cancelButtonText: "Não.",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete("servicos/" + id).then((resp) => {
+                    axios.delete("api/servicos/" + id).then((resp) => {
                         Swal.fire({
                             icon: "success",
                             position: "top-end",

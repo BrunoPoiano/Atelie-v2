@@ -49,7 +49,7 @@ export default {
         const getClientes = () => {
             fd.append("cliente", cliente.value);
             axios
-                .post("clientes/getClientes", fd)
+                .post("api/clientes/getClientes", fd)
                 .then((resp) => {
                     clientes.value = resp.data;
                 })
