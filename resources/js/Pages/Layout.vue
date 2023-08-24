@@ -47,7 +47,7 @@ export default {};
   display: flex;
   gap: 10px;
   margin-top: 100px;
-  padding: 10px;
+  padding: 10px 20px;
   align-items: start;
 }
 

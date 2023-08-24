@@ -1,9 +1,6 @@
 <template>
-    <div class="col-lg-10 col-md-6 text-center">
+    <div class="title-clientes" >
         <h1>Clientes</h1>
-    </div>
-    <!-- Button trigger modal -->
-    <div class="col align-self-center">
         <button
             type="button"
             class="btn btn-primary btn-lg"
@@ -127,6 +124,15 @@ export default {
 </script>
 
 <style>
+
+.title-clientes{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap:10px;
+    flex-wrap: wrap;
+}
+
 .modal {
     font-size: 1.5rem;
 }

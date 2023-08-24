@@ -1,12 +1,12 @@
 <template>
  
-    <div class="container text-capitalize">
+    <div >
         <br>
-        <div class="row">
+        <div>
             <add-clientes @mensagem="exibirmensagem" />
         </div>
         <br />
-        <div class="p-2">
+        <div >
             <input
                 type="text"
                 class="form-control form-control-lg"
