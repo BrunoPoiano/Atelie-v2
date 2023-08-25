@@ -55,6 +55,7 @@
     <div class="row">
       <transition-group name="list">
         <div
+          class="col-sm-12 col-md-6 col-lg-4 p-2 text-capitalize"
           v-for="ser in servicos"
           :key="ser.id"
         >

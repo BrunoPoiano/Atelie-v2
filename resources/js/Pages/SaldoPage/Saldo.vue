@@ -4,8 +4,8 @@
         <div class="col text-center">
             <h1>Saldo</h1>
         </div>
-        <div class="row">
-            <div class="col input-group-lg align-self-center">
+        <div class="">
+            <div class="">
                 <h4 class="form-label">Ano Desejado</h4>
                 <input
                     type="number"
@@ -15,7 +15,7 @@
                     @change="getano"
                 />
             </div>
-            <div class="col-6 align-self-center">
+            <div class="">
                 <div class="row">
                     <div class="col-6">
                         <h3 class="text.dark text-center fw-bold">Hoje</h3>
@@ -51,7 +51,7 @@
         <br />
         <div class="row p-3 boxshadowsaldo">
             <div
-                class="card col-3"
+                class="card col-lg-3 col-md-6  col-sm-12"
                 v-for="(sld, index) in saldomensal"
                 :key="index"
             >

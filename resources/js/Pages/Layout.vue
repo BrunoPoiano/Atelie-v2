@@ -48,7 +48,7 @@ export default {};
   gap: 10px;
   margin-top: 100px;
   padding: 10px 20px;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .atelie-layout-menu {
@@ -70,6 +70,7 @@ export default {};
 
 .atelie-layout-content {
   flex-grow: 99;
+  width: 100%;
 }
 
 

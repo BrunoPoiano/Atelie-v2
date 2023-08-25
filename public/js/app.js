@@ -19386,10 +19386,10 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_4 = {
-  "class": "row"
+  "class": ""
 };
 var _hoisted_5 = {
-  "class": "col input-group-lg align-self-center"
+  "class": ""
 };
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", {
@@ -19399,7 +19399,7 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_7 = {
-  "class": "col-6 align-self-center"
+  "class": ""
 };
 var _hoisted_8 = {
   "class": "row"
@@ -19498,7 +19498,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )])])])])])])]), _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.saldomensal, function (sld, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
-      "class": "card col-3",
+      "class": "card col-lg-3 col-md-6  col-sm-12",
       key: index
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(sld.mes), 1
     /* TEXT */
@@ -19662,6 +19662,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.servicos, function (ser) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+          "class": "col-sm-12 col-md-6 col-lg-4 p-2 text-capitalize",
           key: ser.id
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_servicos_card, {
           servicos: ser,
@@ -20414,7 +20415,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.atelie-layout[data-v-7edced13] {\n  display: flex;\n  gap: 10px;\n  margin-top: 100px;\n  padding: 10px 20px;\n  align-items: start;\n}\n.atelie-layout-menu[data-v-7edced13] {\n  width: 150px;\n  flex-grow: 1;\n\n  display: flex;\n  gap: 5px;\n  flex-direction: column;\n  flex-wrap: wrap;\n\n  top: 100px;\n  position: sticky;\n}\n.atelie-layout-menu > a[data-v-7edced13] {\n  width: 100%;\n}\n.atelie-layout-content[data-v-7edced13] {\n  flex-grow: 99;\n}\n@media (width < 700px) {\n.atelie-layout[data-v-7edced13] {\n        flex-direction: column;\n}\n.atelie-layout-menu[data-v-7edced13] {\n        flex-direction: row;\n        justify-content: space-around;\n        width: 100%;\n        position: inherit;\n}\n.atelie-layout-menu > a[data-v-7edced13] {\n        width: 140px;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.atelie-layout[data-v-7edced13] {\n  display: flex;\n  gap: 10px;\n  margin-top: 100px;\n  padding: 10px 20px;\n  align-items: flex-start;\n}\n.atelie-layout-menu[data-v-7edced13] {\n  width: 150px;\n  flex-grow: 1;\n\n  display: flex;\n  gap: 5px;\n  flex-direction: column;\n  flex-wrap: wrap;\n\n  top: 100px;\n  position: sticky;\n}\n.atelie-layout-menu > a[data-v-7edced13] {\n  width: 100%;\n}\n.atelie-layout-content[data-v-7edced13] {\n  flex-grow: 99;\n  width: 100%;\n}\n@media (width < 700px) {\n.atelie-layout[data-v-7edced13] {\n        flex-direction: column;\n}\n.atelie-layout-menu[data-v-7edced13] {\n        flex-direction: row;\n        justify-content: space-around;\n        width: 100%;\n        position: inherit;\n}\n.atelie-layout-menu > a[data-v-7edced13] {\n        width: 140px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
