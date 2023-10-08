@@ -1,16 +1,15 @@
 version: '3.3'
-
 services:
   app-atelie:
     build: .
     ports:
-      - "8080:80"
+      - "8090:80"
     volumes:
       - ./:/var/www/html
     networks:
       - app-network
     container_name: app-atelie
-    
+    restart: unless-stopped
 
   mysql-db:
     image: mysql:8.0
@@ -25,6 +24,22 @@ services:
     container_name: app-atelie-db
     networks:
       - app-network
+    restart: unless-stopped
+
+  phpmyadmin:
+    container_name: app-atelie-phpmyadmin
+    image: phpmyadmin
+    ports:
+      - 8095:80
+    networks:
+      - app-network
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=mysql-db
+      - PMA_USER:brunopoiano
+      - PMA_PASSWORD:'brunopoiano'
+      - MYSQL_TCP_PORT:3308
+    restart: unless-stopped
     
 networks:
   app-network:
