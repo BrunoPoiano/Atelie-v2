@@ -6,6 +6,7 @@ use App\Http\Controllers\Cliente\ClienteController;
 use App\Http\Controllers\Saldo\SaldoController;
 use App\Http\Controllers\Servico\ServicoController;
 use App\Http\Controllers\Todo\TodoController;
+use App\Http\Controllers\Exercise\WeightController;
 
 Route::resource('clientes', ClienteController::class);
 Route::post('clientes/getClientes', [ClienteController::class, 'getClientes'])->name('getClientes');
@@ -19,3 +20,8 @@ Route::resource('todo', TodoController::class);
 Route::get('getprioridades', [TodoController::class, 'getprioridades'])->name('getprioridades');
 Route::get('getafazeres', [TodoController::class, 'getafazeres'])->name('getafazeres');
 Route::get('getafazeresfinalizados', [TodoController::class, 'getafazeresfinalizados'])->name('getafazeresfinalizados');
+
+
+Route::prefix('weight')->group(function () {
+    Route::get('', [WeightController::class, 'getWeight']);
+});

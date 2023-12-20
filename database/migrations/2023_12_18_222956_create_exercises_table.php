@@ -11,10 +11,14 @@ class CreateExercisesTable extends Migration
      *
      * @return void
      */
+
+     protected $connection = 'exercise_mysql';
+
     public function up()
     {
-        Schema::create('exercises', function (Blueprint $table) {
+        Schema::connection("exercise_mysql")->create('weight', function($table){
             $table->id();
+            $table->double('weight')->default(0);
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateExercisesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exercises');
+        Schema::connection('exercise_mysql')->dropIfExists('weight');
     }
 }
