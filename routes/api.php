@@ -24,4 +24,7 @@ Route::get('getafazeresfinalizados', [TodoController::class, 'getafazeresfinaliz
 
 Route::prefix('weight')->group(function () {
     Route::get('', [WeightController::class, 'getWeight']);
+    Route::post('', [WeightController::class, 'createWeight']);
+    Route::put('{weight}', [WeightController::class, 'editWeight']);
+    Route::delete('{weight}', [WeightController::class, 'deleteWeight']);
 });
