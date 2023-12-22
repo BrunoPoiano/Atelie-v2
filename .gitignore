@@ -21,9 +21,3 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
-/.docker
-.docker
-.docker/**
-**/.docker/**
-**/.docker/**
-**/.docker/**
