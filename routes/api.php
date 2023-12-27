@@ -25,14 +25,19 @@ Route::get('getafazeresfinalizados', [TodoController::class, 'getafazeresfinaliz
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('create-user', [AuthController::class, 'createUsers']);
-Route::prefix('{user}')->group(function () {
-    Route::post('update-user', [AuthController::class, 'updateUser']);
+
+Route::middleware('auth:api')->group(function () {
+    
+    Route::get('check-auth', [AuthController::class, 'checkAuth']);
+    Route::prefix('{user}')->group(function () {
+        Route::post('update-user', [AuthController::class, 'updateUser']);
+    });
+    
+    Route::prefix('weight')->group(function () {
+        Route::get('', [WeightController::class, 'getWeight']);
+        Route::post('', [WeightController::class, 'createWeight']);
+        Route::put('{weight}', [WeightController::class, 'editWeight']);
+        Route::delete('{weight}', [WeightController::class, 'deleteWeight']);
+    });
 });
 
-
-Route::prefix('weight')->group(function () {
-    Route::get('', [WeightController::class, 'getWeight']);
-    Route::post('', [WeightController::class, 'createWeight']);
-    Route::put('{weight}', [WeightController::class, 'editWeight']);
-    Route::delete('{weight}', [WeightController::class, 'deleteWeight']);
-});

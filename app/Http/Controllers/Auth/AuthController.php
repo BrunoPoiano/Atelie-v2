@@ -59,16 +59,21 @@ class AuthController extends Controller
     ]);
 
     if (Auth::attempt($credentials)) {
-      $user = Auth::user();
+      $user = $request->user();
+      $client = $user->createToken('MyApp');
+      $accessToken = $client->accessToken;
 
-      $token = $user->createToken('access_token')->accessToken;
-
-      return response([
-        'token' => $token,
-        'user' => $user,
-      ], 200);
+      \Log::info($client); // Check the client instance
+      \Log::info($accessToken); // Check the access token
+  
+      return response()->json(['token' => $accessToken]);
     }
 
     return response(['error' => 'Error authentication'], 500);
+  }
+
+  public function checkAuth(Request $request)
+  {
+    return 'aqui';
   }
 }
