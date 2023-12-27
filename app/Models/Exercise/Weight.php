@@ -13,6 +13,6 @@ class Weight extends Model
 
     protected $table = "weight";
 
-    protected $fillable = ['weight'];
+    protected $fillable = ['user_id', 'weight'];
 
 }

@@ -28,8 +28,11 @@ class WeightController extends Controller
       'weight' => 'required'
     ]);
 
+    $user = $request->user();
+
     Weight::create([
-      'weight' => $request->weight
+      'user_id' => $user->id,
+      'weight' => $request->weight,
     ]);
 
     return response([], 200);
