@@ -1,0 +1,73 @@
+version: '3.3'
+services:
+  app-atelie:
+    build: .
+    ports:
+      - "8090:80"
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - app-network
+    container_name: app-atelie
+    restart: unless-stopped
+
+  mysql-db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_DATABASE: appatelie
+      MYSQL_ROOT_PASSWORD: abc123@
+    container_name: app-atelie-db
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  phpmyadmin:
+    container_name: app-atelie-phpmyadmin
+    image: phpmyadmin
+    ports:
+      - 8095:80
+    networks:
+      - app-network
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=mysql-db
+      - PMA_USER:brunopoiano
+      - PMA_PASSWORD:'brunopoiano'
+      - MYSQL_TCP_PORT:3308
+    restart: unless-stopped
+    
+networks:
+  app-network:
+    driver: bridge
+
+
+  # app-redis:
+  #   image: redis:4.0.5-alpine
+  #   ports:
+  #     - "6379:6379"
+  #   command: [ "redis-server", "--appendonly", "yes" ]
+  #   hostname: redis
+  #   volumes:
+  #     - .docker/app-atelie_dev_redis-data:/data
+  #   container_name: "app-atelie_dev_redis"
+  #   depends_on:
+  #     - app-atelie
+  #   networks:
+  #     - app-network
+
+  # redis-commander:
+  #     container_name: redis-commander
+  #     hostname: redis-commander
+  #     image: ghcr.io/joeferner/redis-commander:latest
+  #     environment:
+  #     - REDIS_HOSTS=local:redis:6379
+  #     ports:
+  #     - "8081:8081"
+  #     depends_on:
+  #     - "app-redis"
+  #     networks:
+  #       - app-network
+
