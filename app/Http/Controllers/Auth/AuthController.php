@@ -20,7 +20,7 @@ class AuthController extends Controller
     ]);
 
     if ($validator->fails()) {
-      return response(['errors' => $validator->errors(), 500]);
+      return response(['errors' => $validator->errors()], 500);
     }
 
     User::create([
