@@ -9,6 +9,7 @@
   <li><code> php artisan key:generate</code> </li>
   <li><code> php artisan migrate</code> </li>
   <li><code> php artisan db:seed</code> </li>
+  <li><code> php artisan passport:install</code> </li>
   <li><code> php artisan optimize</code> </li>
   <li>Acesse o aplicativo em seu navegador em <a href="http://localhost:8080/">http://localhost:8080/</a>.</li>
 </ol>
