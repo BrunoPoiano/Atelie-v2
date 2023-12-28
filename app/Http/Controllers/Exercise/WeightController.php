@@ -13,7 +13,7 @@ class WeightController extends Controller
 
     $user = $request->user();
 
-    $Weight = Weight::whrere('user_id', $user->id)
+    $Weight = Weight::where('user_id', $user->id)
     ->orderby('id', 'desc');
 
     $perPage = $request->per_page ?? 10;
