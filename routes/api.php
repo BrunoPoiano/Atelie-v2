@@ -8,6 +8,7 @@ use App\Http\Controllers\Saldo\SaldoController;
 use App\Http\Controllers\Servico\ServicoController;
 use App\Http\Controllers\Todo\TodoController;
 use App\Http\Controllers\Exercise\WeightController;
+use App\Http\Controllers\Moto\MotoController;
 
 Route::resource('clientes', ClienteController::class);
 Route::post('clientes/getClientes', [ClienteController::class, 'getClientes'])->name('getClientes');
@@ -27,17 +28,25 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('create-user', [AuthController::class, 'createUsers']);
 
 Route::middleware('auth:api')->group(function () {
-    
-    Route::get('check-auth', [AuthController::class, 'checkAuth']);
-    Route::prefix('{user}')->group(function () {
-        Route::post('update-user', [AuthController::class, 'updateUser']);
-    });
-    
-    Route::prefix('weight')->group(function () {
-        Route::get('', [WeightController::class, 'getWeight']);
-        Route::post('', [WeightController::class, 'createWeight']);
-        Route::put('{weight}', [WeightController::class, 'editWeight']);
-        Route::delete('{weight}', [WeightController::class, 'deleteWeight']);
-    });
-});
 
+  Route::get('check-auth', [AuthController::class, 'checkAuth']);
+  Route::prefix('{user}')->group(function () {
+    Route::post('update-user', [AuthController::class, 'updateUser']);
+  });
+
+  Route::prefix('weight')->group(function () {
+    Route::get('', [WeightController::class, 'getWeight']);
+    Route::post('', [WeightController::class, 'createWeight']);
+    Route::put('{weight}', [WeightController::class, 'editWeight']);
+    Route::delete('{weight}', [WeightController::class, 'deleteWeight']);
+  });
+
+  Route::prefix('moto')->group(function () {
+    Route::prefix('kms')->group(function () {
+      Route::get('', [MotoController::class, 'getKms']);
+      Route::post('', [MotoController::class, 'createKms']);
+      Route::put('{km}', [MotoController::class, 'editKms']);
+      Route::delete('{km}', [MotoController::class, 'deleteKms']);
+    });
+  });
+});
