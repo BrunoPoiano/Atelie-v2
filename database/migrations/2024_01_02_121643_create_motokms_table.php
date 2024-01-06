@@ -12,7 +12,7 @@ class CreateMotokmsTable extends Migration
     {
         Schema::connection("exercise_mysql")->create('motokms', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->after('id');
+            $table->integer('user_id');
             $table->double('km')->default(0);
             $table->double('liters')->default(0);
             $table->timestamps();
