@@ -47,6 +47,8 @@ Route::middleware('auth:api')->group(function () {
       Route::post('', [MotoController::class, 'createKms']);
       Route::put('{km}', [MotoController::class, 'editKms']);
       Route::delete('{km}', [MotoController::class, 'deleteKms']);
+
+      Route::get('info', [MotoController::class, 'getKmInfos']);
     });
   });
 });

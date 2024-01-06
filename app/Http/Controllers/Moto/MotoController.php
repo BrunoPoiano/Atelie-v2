@@ -67,4 +67,20 @@ class MotoController extends Controller
     return response([], 200);
   }
 
+  public function getKmInfos(Request $request)
+  {
+
+    $user = $request->user();
+
+    $infos =  Motokm::where('user_id', $user->id)
+    ->selectRaw('
+    SUM(km) as kms,
+    SUM(liters) as liters,
+    SUM(km) / SUM(liters) as average
+    ')
+    ->first();
+
+    return response($infos, 200);
+
+  }
 }
